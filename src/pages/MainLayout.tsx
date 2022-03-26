@@ -4,7 +4,7 @@ import { Navbar, SideBar, Footer } from "./LayoutComponents";
 
 const MainLayout: FC = () => {
   return (
-    <main>
+    <main className="main-layout">
       <Navbar />
       <div className="content">
         <SideBar />

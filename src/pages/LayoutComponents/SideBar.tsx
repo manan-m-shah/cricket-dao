@@ -1,17 +1,21 @@
 import { FC } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { pathsAndComponents } from "../../App";
 
 const SideBar: FC = () => {
+  let navigate = useNavigate();
   return (
     <aside>
-      {pathsAndComponents.map((elm, index) => {
-        return (
-          <Link key={index} to={elm.path}>
-            {elm.path}
-          </Link>
-        );
-      })}
+      <ul>
+        {pathsAndComponents.map((elm, index) => {
+          return (
+            <li key={index} onClick={() => navigate(elm.path)}>
+              {/* {elm.icon} */}
+              {elm.path}
+            </li>
+          );
+        })}
+      </ul>
     </aside>
   );
 };

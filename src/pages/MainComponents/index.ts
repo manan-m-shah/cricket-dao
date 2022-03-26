@@ -1,6 +1,7 @@
 import Enacted from "./Enacted";
+import ProposalCard from "./ProposalCard";
 import Proposals from "./Proposals";
 import Tickets from "./Tickets";
 import Transparency from "./Transparency";
 
-export { Enacted, Transparency, Proposals, Tickets };
+export { Enacted, Transparency, Proposals, Tickets, ProposalCard };

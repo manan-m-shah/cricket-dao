@@ -1,0 +1,61 @@
+.card {
+  background-color: white;
+  padding: 1.3rem;
+  margin: 1.5rem;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  border-radius: 7px;
+  cursor: pointer;
+
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transform: translateY(-5px);
+  }
+
+  .proposal {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  .row2 {
+    margin-bottom: 0.8rem;
+    .leading {
+      font-weight: 300;
+    }
+    .leading-or-not {
+      font-weight: 500;
+    }
+  }
+
+  .row3 {
+    user-select: none;
+    display: flex;
+    align-items: center;
+    .status {
+      background-color: white;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+      border-radius: 4px;
+      padding: 5px 10px;
+      font-weight: 200;
+
+      &.passed {
+        background-color: rgb(239, 255, 239);
+        color: green;
+      }
+      &.rejected {
+        background-color: #ffe7e7;
+        color: red;
+      }
+    }
+    .time-left {
+      margin-left: 1rem;
+
+      &.pending {
+        background-color: rgb(236, 253, 255);
+        color: black;
+      }
+    }
+  }
+}

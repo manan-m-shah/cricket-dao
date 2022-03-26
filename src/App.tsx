@@ -12,25 +12,30 @@ import NotFound from "./pages/NotFound";
 type IPathsAndComponents = {
   path: string;
   component: JSX.Element;
+  // icon: JSX.Element;
 }[];
 
 export const pathsAndComponents: IPathsAndComponents = [
   {
     path: "tickets",
     component: <Tickets />,
+    // icon: <ConfirmationNumberRoundedIcon />,
   },
   {
     path: "proposals",
     component: <Proposals />,
+    // icon: <ThumbsUpDownRoundedIcon />,
   },
   {
     path: "enacted",
     component: <Enacted />,
+    // icon: <GavelRoundedIcon />,
   },
-  {
-    path: "transparency",
-    component: <Transparency />,
-  },
+  // {
+  //   path: "transparency",
+  //   component: <Transparency />,
+  //   icon: <ConfirmationNumberRoundedIcon />,
+  // },
 ];
 
 function App() {
