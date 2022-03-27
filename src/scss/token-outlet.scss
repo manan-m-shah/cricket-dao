@@ -17,7 +17,7 @@
       border-radius: 7px;
       border: none;
       padding: 1rem 1.5rem;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
 
       transition: all 0.2s ease-in-out;
 
@@ -28,6 +28,10 @@
       &:focus {
         outline: none;
       }
+    }
+
+    button {
+      padding: 1rem 1.5rem;
     }
   }
 

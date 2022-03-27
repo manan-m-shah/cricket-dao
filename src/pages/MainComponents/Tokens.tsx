@@ -23,7 +23,7 @@ const Tokens: FC = () => {
           type="number"
           placeholder="Number of Tokens"
         />
-        <button className="no-up"> Get BCCI Tokens</button>
+        <button> Get BCCI Tokens</button>
       </form>
       <p className="info">
         Your Purchase value:{" "}

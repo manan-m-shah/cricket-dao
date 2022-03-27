@@ -1,13 +1,13 @@
 import { FC } from "react";
 
 const Navbar: FC = () => {
-  const isSignedIn = true;
+  const isSignedIn = false;
   return (
     <nav>
       {!isSignedIn ? (
         <>
           <div></div>
-          <button>Connect Wallet</button>
+          <button className="anim">Connect Wallet</button>
         </>
       ) : (
         <>
