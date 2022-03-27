@@ -14,7 +14,7 @@ const Tickets = () => {
     now.getDate()
   );
   return (
-    <div className="outlet">
+    <div className="outlet tickets">
       <div className="flex flex-wrap">
         <DayPicker
           canChangeMonth={true}

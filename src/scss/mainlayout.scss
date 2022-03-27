@@ -2,17 +2,18 @@
   display: flex;
   flex: 1;
   align-items: stretch;
-  background-color: beige;
+  // background-color: beige;
   margin: 0 5rem;
 }
 
 nav {
+  background-color: #eee;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 0 6rem;
   margin: 0 5rem;
-  background-color: rgb(219, 138, 138);
+  // background-color: rgb(219, 138, 138);
 
   .eth-info {
     p {
@@ -24,11 +25,11 @@ nav {
 footer {
   padding: 2rem;
   margin: 0 5rem;
-  background-color: rgb(74, 129, 129);
+  // background-color: rgb(74, 129, 129);
 }
 
 aside {
-  background-color: rgb(183, 235, 181);
+  // background-color: rgb(183, 235, 181);
   padding: 2rem 1rem;
   min-height: 100%;
 
@@ -44,7 +45,7 @@ aside {
     cursor: pointer;
     text-align: center;
     text-transform: capitalize;
-    background-color: cornflowerblue;
+    // background-color: cornflowerblue;
     padding: 0.75rem 2rem;
     border-radius: 3px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
@@ -62,22 +63,7 @@ aside {
 
 .outlet {
   flex: 1;
-  background-color: aquamarine;
+  // background-color: aquamarine;
   height: 100%;
   min-height: 80vh;
-
-  &.proposals {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 2rem;
-
-    .submission-bar {
-      align-self: flex-end;
-      margin: 2rem 2rem 1rem;
-
-      button:first-child {
-        margin-right: 2rem;
-      }
-    }
-  }
 }

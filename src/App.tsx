@@ -1,12 +1,6 @@
 import { Route, Routes } from "react-router-dom";
-import Homepage from "./pages/Homepage";
-import {
-  Enacted,
-  Proposals,
-  Tickets,
-  Tokens,
-  Transparency,
-} from "./pages/MainComponents";
+import LandingPage from "./pages/LandingPage";
+import { Enacted, Proposals, Tickets, Tokens } from "./pages/MainComponents";
 import MainLayout from "./pages/MainLayout";
 import NotFound from "./pages/NotFound";
 
@@ -44,7 +38,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route index element={<Homepage />} />
+        <Route index element={<LandingPage />} />
         <Route path="/" element={<MainLayout />}>
           {pathsAndComponents.map((elm, index) => {
             return (

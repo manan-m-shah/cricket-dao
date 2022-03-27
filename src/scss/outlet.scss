@@ -1,0 +1,18 @@
+.outlet.proposals {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+
+  .submission-bar {
+    align-self: flex-end;
+    margin: 2rem 2rem 1rem;
+
+    button:first-child {
+      margin-right: 2rem;
+    }
+  }
+}
+
+.outlet.tickets {
+  margin: 2rem;
+}
