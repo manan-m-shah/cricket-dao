@@ -5,7 +5,8 @@ import { ethers } from "ethers";
 
 const Web3Provider: React.FC = (props) => {
   const [currentAccount, setCurrentAccount] = useState("");
-  const [tickets, setTickets] = useState(["Tickets"]);
+  const [tickets, setTickets] = useState<any[]>([]);
+  const [date, setDate] = useState([0, 0, 0]);
 
   const connectMetamask = async () => {
     const accounts: any = await connectWallet();
@@ -44,7 +45,7 @@ const Web3Provider: React.FC = (props) => {
     const contract = fetchContract("Test")!;
     const response = await contract.buytickets(
       "First Game",
-      { date: 1, month: 1, year: 1 },
+      { date: date[0], month: date[1], year: date[2] },
       1,
       options
     );
@@ -68,6 +69,8 @@ const Web3Provider: React.FC = (props) => {
         getTickets,
         currentAccount,
         tickets,
+        date,
+        setDate,
       }}
     >
       {props.children}
