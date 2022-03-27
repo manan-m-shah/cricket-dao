@@ -1,0 +1,233 @@
+{
+    "abi": [
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "previousOwner",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "newOwner",
+                    "type": "address"
+                }
+            ],
+            "name": "OwnershipTransferred",
+            "type": "event"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "gamename",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "date",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "month",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "year",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "seatnumber",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "ticketprice",
+                    "type": "uint256"
+                }
+            ],
+            "name": "addtickets",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "gamename",
+                    "type": "string"
+                },
+                {
+                    "components": [
+                        {
+                            "internalType": "uint256",
+                            "name": "date",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "month",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "year",
+                            "type": "uint256"
+                        }
+                    ],
+                    "internalType": "struct Tickets.time",
+                    "name": "t",
+                    "type": "tuple"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "seatnumber",
+                    "type": "uint256"
+                }
+            ],
+            "name": "buytickets",
+            "outputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "string",
+                            "name": "gamename",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "seatNumber",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "ticketPrice",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "day",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "month",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "year",
+                            "type": "uint256"
+                        }
+                    ],
+                    "internalType": "struct Tickets.Ticket",
+                    "name": "",
+                    "type": "tuple"
+                }
+            ],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "owner",
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "renounceOwnership",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "date",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "month",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "year",
+                    "type": "uint256"
+                }
+            ],
+            "name": "showallticketsoftheday",
+            "outputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "string",
+                            "name": "gamename",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "seatNumber",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "ticketPrice",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "day",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "month",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "year",
+                            "type": "uint256"
+                        }
+                    ],
+                    "internalType": "struct Tickets.Ticket[]",
+                    "name": "",
+                    "type": "tuple[]"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "newOwner",
+                    "type": "address"
+                }
+            ],
+            "name": "transferOwnership",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        }
+    ]
+}
