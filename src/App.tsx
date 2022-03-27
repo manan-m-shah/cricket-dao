@@ -4,6 +4,7 @@ import {
   Enacted,
   Proposals,
   Tickets,
+  Tokens,
   Transparency,
 } from "./pages/MainComponents";
 import MainLayout from "./pages/MainLayout";
@@ -19,17 +20,18 @@ export const pathsAndComponents: IPathsAndComponents = [
   {
     path: "tickets",
     component: <Tickets />,
-    // icon: <ConfirmationNumberRoundedIcon />,
   },
   {
     path: "proposals",
     component: <Proposals />,
-    // icon: <ThumbsUpDownRoundedIcon />,
   },
   {
     path: "enacted",
     component: <Enacted />,
-    // icon: <GavelRoundedIcon />,
+  },
+  {
+    path: "tokens",
+    component: <Tokens />,
   },
   // {
   //   path: "transparency",

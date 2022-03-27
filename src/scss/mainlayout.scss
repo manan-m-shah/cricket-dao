@@ -9,10 +9,16 @@
 nav {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: 1rem;
   margin: 0 5rem;
   background: rgb(219, 138, 138);
+
+  .eth-info {
+    p {
+      // text-decoration: un;
+    }
+  }
 }
 
 aside {

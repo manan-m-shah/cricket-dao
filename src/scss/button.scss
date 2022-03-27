@@ -1,15 +1,44 @@
 button {
-  background: rgb(250, 250, 250);
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   border-radius: 7px;
   border: none;
-  padding: 1rem 2rem;
+  padding: 0.7rem 1.5rem;
   cursor: pointer;
+
+  background: linear-gradient(
+    -45deg,
+    #09eab4,
+    #64a89e,
+    #0c3c4c,
+    #7a7985,
+    #bcbabc,
+    #2c2443
+  );
+  color: white;
+  background-size: 400% 400%;
+  animation: gradient 25s ease-in-out infinite;
+
+  // animation-name: backgroundColorPalette;
+  // animation-duration: 5s;
+  // animation-iteration-count: infinite;
+  // animation-direction: alternate;
 
   transition: all 0.2s ease-in-out;
 
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     transform: translateY(-5px);
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
