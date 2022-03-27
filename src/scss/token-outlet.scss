@@ -7,23 +7,32 @@
   padding: 3rem;
 
   form {
+    // background-color: chocolate;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+
     input[type="number"] {
       box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
       border-radius: 7px;
       border: none;
-      padding: 0.7rem 1.5rem;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1rem;
 
       transition: all 0.2s ease-in-out;
 
       &:hover {
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        transform: translateY(-5px);
       }
 
       &:focus {
-        transform: translateY(0px);
         outline: none;
       }
     }
+  }
+
+  .info {
+    font-size: 2.5rem;
+    margin: 2rem 0;
   }
 }

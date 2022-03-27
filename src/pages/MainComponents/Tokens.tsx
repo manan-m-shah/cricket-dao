@@ -9,8 +9,8 @@ const Tokens: FC = () => {
 
   return (
     <div className="outlet token-outlet">
-      <p>
-        Current Price: <code>$BCCI</code> = <code>{exchangeRate} ETH</code>
+      <p className="info">
+        <code>BCCI</code> = <code>{exchangeRate} ETH</code>
       </p>
       <form>
         <input
@@ -23,10 +23,10 @@ const Tokens: FC = () => {
           type="number"
           placeholder="Number of Tokens"
         />
-        <button> Get BCCI Tokens</button>
+        <button className="no-up"> Get BCCI Tokens</button>
       </form>
-      <p>
-        Your Purchase value ={" "}
+      <p className="info">
+        Your Purchase value:{" "}
         <code>{((tokenInput ?? 0) * exchangeRate).toFixed(5)} ETH</code>
       </p>
     </div>

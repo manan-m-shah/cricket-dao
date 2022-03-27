@@ -7,7 +7,7 @@ button {
 
   background: linear-gradient(
     -45deg,
-    #09eab4,
+    #2c2443,
     #64a89e,
     #0c3c4c,
     #7a7985,
@@ -16,7 +16,8 @@ button {
   );
   color: white;
   background-size: 400% 400%;
-  animation: gradient 25s ease-in-out infinite;
+  animation: gradient 5s ease-in-out infinite;
+  animation-direction: alternate;
 
   // animation-name: backgroundColorPalette;
   // animation-duration: 5s;
@@ -28,6 +29,12 @@ button {
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     transform: translateY(-5px);
+  }
+
+  &.no-up {
+    &:hover {
+      transform: translateY(0px);
+    }
   }
 }
 
