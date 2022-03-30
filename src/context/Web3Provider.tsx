@@ -6,7 +6,11 @@ import { ethers } from "ethers";
 const Web3Provider: React.FC = (props) => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [tickets, setTickets] = useState<any[]>([]);
-  const [date, setDate] = useState([0, 0, 0]);
+  const [currentDate, setCurrentDate] = useState({
+    date: null,
+    month: null,
+    year: null,
+  });
 
   const connectMetamask = async () => {
     const accounts: any = await connectWallet();
@@ -22,34 +26,50 @@ const Web3Provider: React.FC = (props) => {
     console.log(response);
   };
 
-  const addTicket = async () => {
-    const contract = fetchContract("Tickets")!;
+  const addTicket = async (
+    gameName: string,
+    amount: string,
+    seatNumber: string
+  ) => {
+    console.log(currentDate);
+    const contract = fetchContract("Test")!;
     const response = await contract.addtickets(
-      "First Game",
-      { date: 1, month: 1, year: 1 },
-      1,
-      ethers.utils.parseEther("0.1")
+      gameName,
+      currentDate.date,
+      currentDate.month,
+      currentDate.year,
+      seatNumber,
+      ethers.utils.parseEther(amount)
     );
     console.log(response);
   };
 
   const getTickets = async () => {
     const contract = fetchContract("Test")!;
-    const response = await contract.showallticketsoftheday(1, 1, 1);
-    console.log(response);
+    const response = await contract.showallticketsoftheday(
+      currentDate.date,
+      currentDate.month,
+      currentDate.year
+    );
+    console.log("Tickets:", response);
     setTickets(response);
   };
 
-  const buyTicket = async () => {
-    const options = { value: ethers.utils.parseEther("0.1") };
+  const buyTicket = async (
+    gameName: string,
+    seatNumber: string,
+    price: string
+  ) => {
+    const options = { value: ethers.utils.parseEther(price) };
     const contract = fetchContract("Test")!;
     const response = await contract.buytickets(
-      "First Game",
-      { date: date[0], month: date[1], year: date[2] },
-      1,
+      gameName,
+      currentDate,
+      seatNumber,
       options
     );
     console.log(response);
+    getTickets();
   };
 
   useEffect(() => {
@@ -69,8 +89,8 @@ const Web3Provider: React.FC = (props) => {
         getTickets,
         currentAccount,
         tickets,
-        date,
-        setDate,
+        currentDate,
+        setCurrentDate,
       }}
     >
       {props.children}

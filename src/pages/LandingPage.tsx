@@ -3,6 +3,7 @@ import Typewriter from "typewriter-effect";
 import vote from "../images/vote.png";
 import people from "../images/people.png";
 import tokens from "../images/tokens.png";
+import { useNavigate } from "react-router-dom";
 
 const TypewriterSection = () => {
   return (
@@ -25,6 +26,7 @@ const TypewriterSection = () => {
 };
 
 const LandingPageFirstSection = () => {
+  const navigate = useNavigate();
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center bg-gradient-to-b from-slate-900">
       <div className="">
@@ -33,7 +35,7 @@ const LandingPageFirstSection = () => {
           <TypewriterSection />
         </h3>
         <div className="flex items-center justify-center">
-          <button>Launch App</button>
+          <button onClick={() => navigate("/tokens")}>Launch App</button>
         </div>
       </div>
     </div>
