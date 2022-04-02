@@ -1,6 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
-import { Enacted, Proposals, Tickets, Tokens } from "./pages/MainComponents";
+import {
+  Enacted,
+  Proposals,
+  Tickets,
+  Tokens,
+  NewProposal,
+  Team,
+} from "./pages/MainComponents";
 import MainLayout from "./pages/MainLayout";
 import NotFound from "./pages/NotFound";
 
@@ -26,6 +33,14 @@ export const pathsAndComponents: IPathsAndComponents = [
   {
     path: "tokens",
     component: <Tokens />,
+  },
+  {
+    path: "new-proposal",
+    component: <NewProposal />,
+  },
+  {
+    path: "team",
+    component: <Team />,
   },
   // {
   //   path: "transparency",

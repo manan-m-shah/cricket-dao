@@ -1,21 +1,24 @@
 import { FC } from "react";
+import { useWeb3Context } from "../../context/Web3Context";
 
 const Navbar: FC = () => {
-  const isSignedIn = false;
+  const { currentAccount, connectMetamask } = useWeb3Context();
   return (
     <nav>
-      {!isSignedIn ? (
+      {!currentAccount ? (
         <>
           <div></div>
-          <button className="anim">Connect Wallet</button>
+          <button className="anim" onClick={connectMetamask}>
+            Connect Wallet
+          </button>
         </>
       ) : (
         <>
           <div className="user">
-            <p>Welcome user name</p>
+            <p>Welcome {currentAccount}</p>
           </div>
           <div className="eth-info">
-            <p>0.4325ETH bla bla</p>
+            <p>0.4325ETH</p>
           </div>
         </>
       )}
