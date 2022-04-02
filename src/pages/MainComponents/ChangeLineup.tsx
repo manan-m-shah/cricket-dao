@@ -6,9 +6,13 @@ import PlayerCard from "./PlayerCard";
 
 const ChangeLineup = () => {
   const [players, setPlayers] = useState(playersData);
-  const { team, setTeam } = useWeb3Context();
+  const { team, setTeam, fetchTeam } = useWeb3Context();
   const [exitPlayer, setExitPlayer] = useState(null);
   const [enterPlayer, setEnterPlayer] = useState(null);
+
+  useEffect(() => {
+    fetchTeam();
+  }, []);
 
   if (!team) {
     return (
