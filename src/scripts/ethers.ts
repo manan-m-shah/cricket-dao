@@ -43,7 +43,7 @@ const getEthereumContract = (
   contractAddress: string,
   contractABI: ContractInterface
 ) => {
-  const provider = new ethers.providers.Web3Provider(ethereum)
+  const provider = new ethers.providers.Web3Provider(ethereum);
   const signer = provider.getSigner()
   const contract = new ethers.Contract(contractAddress, contractABI, signer)
   return contract
