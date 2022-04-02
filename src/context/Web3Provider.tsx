@@ -99,23 +99,26 @@ const Web3Provider: React.FC = (props) => {
     proposalDescription: string
   ) => {
     const governor = fetchContract("GovernorContract");
-      const tickets = fetchContract("Tickets");
-      // let functionToCall = "addtickets";
-      // console.log(typeof Number(price));
-      console.log(typeof currentDate.date);
-      // let args = ["CSK vs MI",28,12,2022,23,100];
-      // [String(gameName),Number(currentDate.date),Number(currentDate.month),Number(currentDate.year),Number(1),Number(price)];
-      const encodedFunctionCall = tickets.interface.encodeFunctionData(functionToCall, args)    
-      // let proposalDescription = `Proposal to add ${amount} tickets of ${gameName} to be played on ${currentDate.date}/${currentDate.month}/${currentDate.year} of ${price} each`;
-    
-      const proposeTx = await governor.propose(
-        [tickets.address],
-        [0],
-        [encodedFunctionCall],
-        proposalDescription
-      );
-      const proposeReceipt = await proposeTx.wait(1)
-      const proposalId = proposeReceipt.events[0].args.proposalId
+    const tickets = fetchContract("Tickets");
+    // let functionToCall = "addtickets";
+    // console.log(typeof Number(price));
+    console.log(typeof currentDate.date);
+    // let args = ["CSK vs MI",28,12,2022,23,100];
+    // [String(gameName),Number(currentDate.date),Number(currentDate.month),Number(currentDate.year),Number(1),Number(price)];
+    const encodedFunctionCall = tickets.interface.encodeFunctionData(
+      functionToCall,
+      args
+    );
+    // let proposalDescription = `Proposal to add ${amount} tickets of ${gameName} to be played on ${currentDate.date}/${currentDate.month}/${currentDate.year} of ${price} each`;
+
+    const proposeTx = await governor.propose(
+      [tickets.address],
+      [0],
+      [encodedFunctionCall],
+      proposalDescription
+    );
+    const proposeReceipt = await proposeTx.wait(1);
+    const proposalId = proposeReceipt.events[0].args.proposalId;
     // propose(functionToCall, args, proposalDescription)
     //   .then((response) => {
     //     console.log(response);
@@ -132,38 +135,51 @@ const Web3Provider: React.FC = (props) => {
     console.log(response);
     setProposals(response);
   };
-  const submitProposalForTickets = async (gameName:string,amount:Number,price:Number) => {
-      // const governor = fetchContract("GovernorContract");
-      // const tickets = fetchContract("Tickets");
-      // let functionToCall = "addtickets";
-      // console.log(typeof Number(price));
-      // console.log(typeof currentDate.date);
-      // let args = ["CSK vs MI",28,12,2022,23,100];
-      // [String(gameName),Number(currentDate.date),Number(currentDate.month),Number(currentDate.year),Number(1),Number(price)];
-      // const encodedFunctionCall = await tickets.interface.encodeFunctionData(functionToCall, args)    
-      // let proposalDescription = `Proposal to add ${amount} tickets of ${gameName} to be played on ${currentDate.date}/${currentDate.month}/${currentDate.year} of ${price} each`;
-    
-      // const proposeTx = await governor.propose(
-      //   [tickets.address],
-      //   [0],
-      //   [encodedFunctionCall],
-      //   proposalDescription
-      // );
-      // const proposeReceipt = await proposeTx.wait(1)
-      // const proposalId = proposeReceipt.events[0].args.proposalId
+  const submitProposalForTickets = async (
+    gameName: string,
+    amount: Number,
+    price: Number
+  ) => {
+    // const governor = fetchContract("GovernorContract");
+    // const tickets = fetchContract("Tickets");
+    // let functionToCall = "addtickets";
+    // console.log(typeof Number(price));
+    // console.log(typeof currentDate.date);
+    // let args = ["CSK vs MI",28,12,2022,23,100];
+    // [String(gameName),Number(currentDate.date),Number(currentDate.month),Number(currentDate.year),Number(1),Number(price)];
+    // const encodedFunctionCall = await tickets.interface.encodeFunctionData(functionToCall, args)
+    // let proposalDescription = `Proposal to add ${amount} tickets of ${gameName} to be played on ${currentDate.date}/${currentDate.month}/${currentDate.year} of ${price} each`;
 
-      // const proposalState = await governor.state(proposalId)
-      // const proposalSnapShot = await governor.proposalSnapshot(proposalId)
-      // const proposalDeadline = await governor.proposalDeadline(proposalId)
-      submitProposal("addtickets",["CSK vs MI",      currentDate.date,
-      currentDate.month,
-      currentDate.year,"23","100"],"proposal to add tickets" )
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error);
-    // process.exit(1);
-  });
-  }
+    // const proposeTx = await governor.propose(
+    //   [tickets.address],
+    //   [0],
+    //   [encodedFunctionCall],
+    //   proposalDescription
+    // );
+    // const proposeReceipt = await proposeTx.wait(1)
+    // const proposalId = proposeReceipt.events[0].args.proposalId
+
+    // const proposalState = await governor.state(proposalId)
+    // const proposalSnapShot = await governor.proposalSnapshot(proposalId)
+    // const proposalDeadline = await governor.proposalDeadline(proposalId)
+    submitProposal(
+      "addtickets",
+      [
+        "CSK vs MI",
+        currentDate.date,
+        currentDate.month,
+        currentDate.year,
+        "23",
+        "100",
+      ],
+      "proposal to add tickets"
+    )
+      .then(() => process.exit(0))
+      .catch((error) => {
+        console.error(error);
+        // process.exit(1);
+      });
+  };
 
   useEffect(() => {
     window.ethereum.on("accountsChanged", function (accounts: String) {
