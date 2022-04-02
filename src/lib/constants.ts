@@ -15,7 +15,8 @@ export const TimeLock_abi = TimeLock.abi;
 export const TimeLock_address = "0x1f80A7B3a49729407B8A68349a1914e6c8Cc4053";
 export const GovernorContract_abi = GovernorContract.abi;
 export const GovernorContract_address =
-  "0x6c69E45BB06BAe9968acB7Fd0CaB1346ef7Fd0a6";
+  "0xb12c5515E231e979adC2dafE397C2a41A6b09332";
+  // "0x6c69E45BB06BAe9968acB7Fd0CaB1346ef7Fd0a6";
 export const Test_abi = Test.output.abi;
 export const Test_address = "0x61c8909C3c0D883Cfe5a8851D851eBa38da9A962";
 

@@ -7,6 +7,7 @@ import { propose } from "../scripts/propose";
 const Web3Provider: React.FC = (props) => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [tickets, setTickets] = useState<any[]>([]);
+  const [proposals, setProposals] = useState<any[]>([]);
   const [currentDate, setCurrentDate] = useState({
     date: null,
     month: null,
@@ -108,7 +109,12 @@ const Web3Provider: React.FC = (props) => {
         process.exit(1);
       });
   };
-
+  const getProposals = async()=>{
+    const contract = fetchContract("GovernorContract")!;
+    const response = await contract.Proposals();
+    console.log(response);
+    setProposals(response);
+  }
   useEffect(() => {
     window.ethereum.on("accountsChanged", function (accounts: String) {
       console.log(accounts[0]);
@@ -132,6 +138,7 @@ const Web3Provider: React.FC = (props) => {
         fetchTeam,
         submitProposal,
         changeLineup,
+        proposals
       }}
     >
       {props.children}
