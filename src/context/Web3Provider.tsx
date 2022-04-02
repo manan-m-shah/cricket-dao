@@ -94,7 +94,7 @@ const Web3Provider: React.FC = (props) => {
     console.log(response);
   };
 
-  const submitProposal = (
+  const submitProposalForTickets = (
     functionToCall: string,
     args: any[],
     proposalDescription: string
@@ -109,12 +109,12 @@ const Web3Provider: React.FC = (props) => {
         process.exit(1);
       });
   };
-  const getProposals = async()=>{
+  const getProposals = async () => {
     const contract = fetchContract("GovernorContract")!;
     const response = await contract.Proposals();
     console.log(response);
     setProposals(response);
-  }
+  };
   useEffect(() => {
     window.ethereum.on("accountsChanged", function (accounts: String) {
       console.log(accounts[0]);
@@ -136,9 +136,9 @@ const Web3Provider: React.FC = (props) => {
         setCurrentDate,
         team,
         fetchTeam,
-        submitProposal,
+        submitProposalForTickets,
         changeLineup,
-        proposals
+        proposals,
       }}
     >
       {props.children}

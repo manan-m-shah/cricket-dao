@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useWeb3Context } from "../../context/Web3Context";
-import BuyTickets from "./BuyTickets";
+import BuyTickets from "./AddTickets";
 import ChangeLineup from "./ChangeLineup";
 
 /*
@@ -11,23 +11,29 @@ Functionalities to include:
 
 const NewProposal = () => {
   const options = {
-    buyTickets: "buyTickets",
+    addTicket: "addTicket",
     changeLineup: "changeLineup",
   };
 
-  const [option, setOption] = useState(options.buyTickets);
+  const [option, setOption] = useState(options.addTicket);
   const { showLineup, changeLineup } = useWeb3Context();
   return (
     <div className="w-full h-screen">
       <div className="flex justify-center items-start">
-        <button className="" onClick={() => setOption(options.buyTickets)}>
-          Buy Tickets
-        </button>
-        <button className="" onClick={() => setOption(options.changeLineup)}>
+        <div
+          className="text-xl p-2 text-gray-600 border-b-2 m-2 drop-shadow-none hover:border-gray-800"
+          onClick={() => setOption(options.addTicket)}
+        >
+          Add Tickets
+        </div>
+        <div
+          className="text-xl p-2 text-gray-600 border-b-2 m-2 drop-shadow-none hover:border-gray-800"
+          onClick={() => setOption(options.changeLineup)}
+        >
           Change Lineup
-        </button>
+        </div>
       </div>
-      {option === options.buyTickets ? <BuyTickets /> : <ChangeLineup />}
+      {option === options.addTicket ? <BuyTickets /> : <ChangeLineup />}
     </div>
   );
 };

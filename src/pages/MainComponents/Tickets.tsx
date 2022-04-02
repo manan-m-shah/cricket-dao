@@ -7,9 +7,6 @@ import Ticket from "./Ticket";
 const Tickets = () => {
   const { getTickets, tickets, currentDate, setCurrentDate, addTicket } =
     useWeb3Context();
-  const [gameName, setGameName] = useState("test");
-  const [amount, setAmount] = useState("0.1");
-  const [seatNumber, setSeatNumber] = useState("1");
 
   const now = new Date();
   const futureLimit = new Date(
