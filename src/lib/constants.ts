@@ -18,4 +18,8 @@ export const GovernorContract_address =
   "0x6c69E45BB06BAe9968acB7Fd0CaB1346ef7Fd0a6";
 export const Test_abi = Test.output.abi;
 export const Test_address = "0x61c8909C3c0D883Cfe5a8851D851eBa38da9A962";
-//0x0Dd6EB54AB6344611B817E2EA6D763cA6b286A9c
+
+/*
+Old Test Contract: 0x0Dd6EB54AB6344611B817E2EA6D763cA6b286A9c 
+Governance Contract (remix): 0xceEe4FAC6F77370d0f0Ed19C82a06eE9Df4D4877
+*/

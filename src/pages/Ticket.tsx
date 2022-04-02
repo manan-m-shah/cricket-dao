@@ -14,7 +14,7 @@ const Ticket: FC<{ ticket: any }> = ({ ticket }) => {
   // const category = categorize(seatNumber)
 
   return (
-    <div className="m-6 h-fit w-fit flex flex-col items-center justify-center rounded-xl drop-shadow-xl bg-white border-gray-300 border-2">
+    <div className="m-8 h-fit w-fit flex flex-col items-center justify-center rounded-xl drop-shadow-xl bg-white border-gray-300 border-2">
       <div className="flex h-[300px] w-[200px] flex-col justify-between ">
         <div className="flex h-1/3 justify-start">
           <div className="p-10 text-4xl text-gray-400">{seatNumber}</div>

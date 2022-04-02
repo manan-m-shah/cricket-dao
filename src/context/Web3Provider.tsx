@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Web3Context from "./Web3Context";
 import { connectWallet, fetchContract } from "../scripts/ethers";
 import { ethers } from "ethers";
+import { propose } from "../scripts/propose";
 
 const Web3Provider: React.FC = (props) => {
   const [currentAccount, setCurrentAccount] = useState("");
@@ -72,6 +73,36 @@ const Web3Provider: React.FC = (props) => {
     getTickets();
   };
 
+  const showLineup = async () => {
+    const contract = fetchContract("TeamLineup")!;
+    const response = await contract.showplayers();
+    console.log(response);
+  };
+
+  const changeLineup = async (lineup: number[]) => {
+    const contract = fetchContract("TeamLineup")!;
+    const response = await contract.changeplayers([
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+    ]);
+    console.log(response);
+  };
+
+  const submitProposal = (
+    functionToCall: string,
+    args: any[],
+    proposalDescription: string
+  ) => {
+    propose(functionToCall, args, proposalDescription)
+      .then((response) => {
+        console.log(response);
+        process.exit(0);
+      })
+      .catch((error) => {
+        console.error(error);
+        process.exit(1);
+      });
+  };
+
   useEffect(() => {
     window.ethereum.on("accountsChanged", function (accounts: String) {
       console.log(accounts[0]);
@@ -91,6 +122,9 @@ const Web3Provider: React.FC = (props) => {
         tickets,
         currentDate,
         setCurrentDate,
+        showLineup,
+        submitProposal,
+        changeLineup,
       }}
     >
       {props.children}

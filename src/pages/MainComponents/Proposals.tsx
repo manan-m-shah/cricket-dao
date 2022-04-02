@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { useNavigate } from "react-router-dom";
 import ProposalCard from "./ProposalCard";
 
 const Proposals: FC = () => {
@@ -15,10 +16,13 @@ const Proposals: FC = () => {
 };
 
 const ProposalSubmision: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <div className="submission-bar">
       <button>All Passed Proposals</button>
-      <button>Sumit A Proposal</button>
+      <button onClick={() => navigate("/new-proposal")}>
+        Sumit A Proposal
+      </button>
     </div>
   );
 };
