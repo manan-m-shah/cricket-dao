@@ -20,6 +20,7 @@ const Web3Provider: React.FC = (props) => {
     if (accounts.length) {
       console.log(accounts[0]);
       setCurrentAccount(accounts[0]);
+      await getProposals();
     }
   };
 
@@ -92,7 +93,18 @@ const Web3Provider: React.FC = (props) => {
     ]);
     console.log(response);
   };
-
+  
+  // async function moveBlocks(amount: number) {
+  //   console.log("Moving blocks...")
+  //   for (let index = 0; index < amount; index++) {
+  //     await rinkbey.provider.request({
+  //       method: "evm_mine",
+  //       params: [],
+  //     })
+  //   }
+  //   console.log(`Moved ${amount} blocks`)
+  // }
+  
   const submitProposal = async (
     functionToCall: string,
     args: any[],
@@ -121,6 +133,7 @@ const Web3Provider: React.FC = (props) => {
     const proposalId = proposeReceipt.events[0].args.proposalId;
     console.log(String(proposalId));
     await getProposals();
+    // await moveBlocks(1 + 1);
     // propose(functionToCall, args, proposalDescription)
     //   .then((response) => {
     //     console.log(response);
@@ -185,7 +198,39 @@ const Web3Provider: React.FC = (props) => {
       //   // process.exit(1);
       // });
   };
-
+  const vote = async (proposalId:string,voteWay:Number) => {
+    const proposalIdint = BigInt(proposalId).toString();
+    console.log(proposalIdint);
+    // console.log(typeof proposalId);
+    let reason;
+    if(voteWay===1){
+      reason="Voting yes";
+    }else{
+      reason="Voting no";
+    }
+    console.log("Voting...");
+    const governor = fetchContract("GovernorContract")!;
+    try {
+      const proposalSnapShot = await governor.proposalSnapshot(proposalId)
+      const proposalDeadline = await governor.proposalDeadline(proposalId)
+        // What block # the proposal was snapshot
+        console.log(`Current Proposal Snapshot: ${proposalSnapShot}`)
+        // The block number the proposal voting expires
+        console.log(`Current Proposal Deadline: ${proposalDeadline}`)
+      const voteTx = await governor.castVoteWithReason(
+        proposalId,
+        voteWay,
+        reason,
+      );
+      console.log(reason);
+      const voteTxReceipt = await voteTx.wait(1);
+      console.log(voteTxReceipt.events[0].args.reason);
+      const proposalState = await governor.state(proposalId);
+      console.log(`Current Proposal State: ${proposalState}`);
+    } catch (error) {
+      console.log("Error in vote function ==> ",error);
+    }
+  }
   useEffect(() => {
     window.ethereum.on("accountsChanged", function (accounts: String) {
       console.log(accounts[0]);
@@ -211,6 +256,7 @@ const Web3Provider: React.FC = (props) => {
         submitProposalForTickets,
         changeLineup,
         proposals,
+        vote
       }}
     >
       {props.children}

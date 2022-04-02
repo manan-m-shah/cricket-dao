@@ -4,11 +4,13 @@ import { useNavigate } from "react-router-dom";
 import ProposalCard from "./ProposalCard";
 
 const Proposals: FC = () => {
-  const { proposals } = useWeb3Context();
+  const { proposals,vote } = useWeb3Context();
   console.log(proposals);
   return (
     <div className="outlet proposals">
       <ProposalSubmision />
+      <button onClick={() => vote(proposals[1],1)}>Vote+</button>
+      <button onClick={() => vote(proposals[1],0)}>Vote-</button>
       {/* <ProposalCard pending={true} leading={true} timeLeft={7} />
       <ProposalCard pending={false} />
       <ProposalCard pending={true} timeLeft={2} />
