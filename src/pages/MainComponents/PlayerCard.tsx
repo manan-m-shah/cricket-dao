@@ -16,7 +16,7 @@ const PlayerCard = ({
 }) => {
   return (
     <div className="w-fit m-6 border-2 border-gray-400 flex">
-      <div className="flex items-center justify-center w-1/3">
+      <div className="flex items-center justify-center w-1/3 bg-white">
         <img src={faces[id - 1]} alt="player" className="bg-contain" />
       </div>
       <div className="w-2/3 bg-gray-100 p-4 items-start flex flex-col">
