@@ -11,7 +11,9 @@ const ChangeLineup = () => {
   const [enterPlayer, setEnterPlayer] = useState(null);
 
   useEffect(() => {
-    fetchTeam();
+    if (!team) {
+      fetchTeam();
+    }
   }, []);
 
   if (!team) {
