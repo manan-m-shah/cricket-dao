@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 import React, { FC } from "react";
-import { useWeb3Context } from "../context/Web3Context";
+import { useWeb3Context } from "../../context/Web3Context";
 
 const Ticket: FC<{ ticket: any }> = ({ ticket }) => {
   console.log(ticket);

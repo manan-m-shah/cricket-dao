@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import DayPicker from "react-day-picker";
 import "react-day-picker/lib/style.css";
 import { useWeb3Context } from "../../context/Web3Context";
-import Ticket from "../Ticket";
+import Ticket from "./Ticket";
 
 const Tickets = () => {
   const { getTickets, tickets, currentDate, setCurrentDate, addTicket } =

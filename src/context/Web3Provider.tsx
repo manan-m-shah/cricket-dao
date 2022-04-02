@@ -12,6 +12,7 @@ const Web3Provider: React.FC = (props) => {
     month: null,
     year: null,
   });
+  const [team, setTeam] = useState<number[]>([]);
 
   const connectMetamask = async () => {
     const accounts: any = await connectWallet();
@@ -73,10 +74,15 @@ const Web3Provider: React.FC = (props) => {
     getTickets();
   };
 
-  const showLineup = async () => {
+  const fetchTeam = async () => {
     const contract = fetchContract("TeamLineup")!;
-    const response = await contract.showplayers();
-    console.log(response);
+    let response = await contract.showplayers();
+    let ids: number[] = [];
+    response.map((id: string) => {
+      ids.push(parseInt(id));
+    });
+    setTeam(ids);
+    return ids;
   };
 
   const changeLineup = async (lineup: number[]) => {
@@ -122,7 +128,8 @@ const Web3Provider: React.FC = (props) => {
         tickets,
         currentDate,
         setCurrentDate,
-        showLineup,
+        team,
+        fetchTeam,
         submitProposal,
         changeLineup,
       }}
