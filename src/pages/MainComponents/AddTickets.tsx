@@ -49,7 +49,7 @@ const BuyTickets = () => {
           />
           <input
             className="w-full text-gray-600 p-6 text-xl m-2 border-gray-200 border-2 rounded-xl"
-            type="text"
+            type="number"
             placeholder="Amount"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
@@ -63,7 +63,7 @@ const BuyTickets = () => {
           />
           <button
             className="w-full m-2 bg-gray-500 text-gray-100 text-xl p-4 rounded-xl"
-            onClick={() => submitProposalForTickets()}
+            onClick={() => submitProposalForTickets(gameName,amount,price)}
           >
             Propose
           </button>
