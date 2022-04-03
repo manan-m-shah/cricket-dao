@@ -20,11 +20,10 @@ const Enacted: FC = () => {
 
   return (
     <div className="outlet proposals">
-      <h1>{proposals.length}</h1>
       {proposals.map((proposal: any) => {
         return (
           <div>
-            <ProposalCard proposal={proposal} />
+            <ProposalCard proposal={proposal} enacted={true} />
           </div>
         );
       })}

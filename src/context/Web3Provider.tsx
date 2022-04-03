@@ -181,7 +181,14 @@ const Web3Provider: React.FC = (props) => {
       const votes = await contract.proposalVotes(proposalId);
       const state = await contract.state(proposalId);
       const hasVoted = await contract.hasVoted(proposalId, currentAccount);
-      const temp = { id: proposalId, votes, state, hasVoted };
+      const title = await contract.ProposalsDescription(proposalId);
+      const temp = {
+        id: proposalId,
+        votes,
+        state,
+        hasVoted,
+        title,
+      };
       await proposalsList.push(temp);
       // console.log(proposalsList);
       setProposals([...proposalsList]);

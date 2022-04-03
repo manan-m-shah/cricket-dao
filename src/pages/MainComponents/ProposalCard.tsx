@@ -11,7 +11,13 @@ import { useWeb3Context } from "../../context/Web3Context";
 //   timeLeft?: number;
 // };
 
-const ProposalCard = ({ proposal }: { proposal: any }) => {
+const ProposalCard = ({
+  proposal,
+  enacted,
+}: {
+  proposal: any;
+  enacted: true;
+}) => {
   const { vote } = useWeb3Context();
 
   //todo proposal card with following properties
@@ -19,10 +25,11 @@ const ProposalCard = ({ proposal }: { proposal: any }) => {
   //*0=pending 1=active 2=cancelled 3=defeated 4-succeeded 5-queded 6-expired 7-excecuted
   const state = proposal.state;
   const hasVotes = proposal.hasVoted;
-
+  const title = proposal.title;
   const abstainVotes = parseInt(votes.abstainVotes);
   const againstVotes = parseInt(votes.againstVotes);
   const forVotes = parseInt(votes.forVotes);
+  const id = proposal.id;
 
   const handleVote = (voteWay: Number) => {
     vote(proposal.id, voteWay);
@@ -31,27 +38,36 @@ const ProposalCard = ({ proposal }: { proposal: any }) => {
   return (
     <div className="flex flex-col card p-4 m-4 rounded-xl">
       <div className="w-full flex flex-col flex-1 ">
-        <h1 className="text-2xl text-gray-800 p-2">Title</h1>
-        <h1 className="text-lg text-gray-700 p-2">
-          Description Description Description Description Description
-          Description Description Description Description
-        </h1>
+        <h1 className="text-2xl text-gray-800 p-2">{title}</h1>
+        <h1 className="text-lg text-gray-700 p-2">{String(id)}</h1>
       </div>
 
-      <div className="flex w-full justify-around">
-        <button className="px-20 py-4" onClick={() => vote(proposal.id, 2)}>
-          Abstain
-        </button>
-        <button className="px-20 py-4" onClick={() => vote(proposal.id, 0)}>
-          Vote Against
-        </button>
-        <button className="px-20 py-4" onClick={() => vote(proposal.id, 1)}>
-          Vote For
-        </button>
-        <button className="px-20 py-4" onClick={() => vote(proposal.id, 1)}>
-          {forVotes}
-        </button>
-      </div>
+      {!enacted ? (
+        <div className="flex w-full justify-around mt-4">
+          <button
+            className="px-20 py-4 text-yellow-800 bg-yellow-100"
+            onClick={() => vote(proposal.id, 2)}
+          >
+            Abstain
+          </button>
+          <button
+            className="px-20 py-4 text-red-800 bg-red-100"
+            onClick={() => vote(proposal.id, 0)}
+          >
+            Vote Against
+          </button>
+          <button
+            className="px-20 py-4 text-green-800 bg-green-100"
+            onClick={() => vote(proposal.id, 1)}
+          >
+            Vote For
+          </button>
+        </div>
+      ) : (
+        <div>
+          <button className="px-10 bg-green-200">Enact</button>
+        </div>
+      )}
     </div>
     // <div className="card">
     //   <h1 className="proposal">Proposal Tital Lorem ipsum dolor sit.</h1>
