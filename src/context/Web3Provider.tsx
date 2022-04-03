@@ -184,19 +184,10 @@ const Web3Provider: React.FC = (props) => {
       const hasVoted = await contract.hasVoted(proposalId, currentAccount);
       const temp = { id: proposalId, votes, state, hasVoted };
       await proposalsList.push(temp);
-      console.log(proposalsList);
-      return temp;
+      // console.log(proposalsList);
+      setProposals([...proposalsList]);
+      return;
     });
-
-    setProposals(proposalsList);
-    console.log(proposalsList);
-    return proposalsList;
-    // await proposalPromise.map(async (promise: any) => {
-    //   const proposal = await promise;
-    //   temp.push(proposal);
-    // });
-
-    // setProposals([...proposals, ...temp]);
   };
   const submitProposalForTeamLineup = async (newTeam: Number[]) => {
     // console.log(newTeam.toString());
