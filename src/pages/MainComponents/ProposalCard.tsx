@@ -56,7 +56,10 @@ const ProposalCard = ({ proposal }: { proposal: any }) => {
         >
           Vote For
         </button>
-        <button className="px-20 py-4" onClick={() => vote(proposal.id, 1)}>
+        <button
+          className="px-20 py-4 no-up"
+          onClick={() => vote(proposal.id, 1)}
+        >
           {forVotes}
         </button>
       </div>

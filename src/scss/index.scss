@@ -32,6 +32,13 @@ code {
     monospace;
 }
 
+.outline-baby {
+  color: black;
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+
 @import "./outlet.scss";
 @import "./homepage.scss";
 @import "./mainlayout.scss";
