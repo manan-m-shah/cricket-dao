@@ -2,7 +2,8 @@ import { FC } from "react";
 import { useWeb3Context } from "../../context/Web3Context";
 
 const Navbar: FC = () => {
-  const { currentAccount, connectMetamask } = useWeb3Context();
+  const { currentAccount,currentBalance, connectMetamask } = useWeb3Context();
+  console.log(currentAccount);
   return (
     <nav>
       {!currentAccount ? (
@@ -18,7 +19,7 @@ const Navbar: FC = () => {
             <p>Welcome {currentAccount}</p>
           </div>
           <div className="eth-info">
-            <p>0.4325ETH</p>
+            <p>{currentBalance}</p>
           </div>
         </>
       )}

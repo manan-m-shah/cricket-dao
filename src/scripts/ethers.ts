@@ -43,7 +43,7 @@ const getEthereumContract = (
   contractAddress: string,
   contractABI: ContractInterface
 ) => {
-  const provider = new ethers.providers.Web3Provider(ethereum)
+  const provider = new ethers.providers.Web3Provider(ethereum);
   const signer = provider.getSigner()
   const contract = new ethers.Contract(contractAddress, contractABI, signer)
   return contract
@@ -74,3 +74,24 @@ export const getWallet = async (metamask = eth) => {
     throw new Error('No ethereum object.')
   }
 }
+
+export const getBalance = async (metamask = eth) => {
+  try {
+    if (!metamask) return alert("Please install metamask ");
+    const currentAccount = await connectWallet();
+    console.log(currentAccount);
+    const balance = await metamask.request({
+      method: "eth_getBalance",
+      params: [currentAccount[0], "latest"],
+    });
+    // console.log(balance);
+      console.log(`balance: ${balance} WEI`);
+      // convert a currency unit from wei to ether
+      const balanceInEth = ethers.utils.formatEther(balance)
+      console.log(`balance: ${balanceInEth} ETH`)
+    return balanceInEth;
+  } catch (error) {
+    console.error(error);
+    throw new Error("No ethereum object.");
+  }
+};

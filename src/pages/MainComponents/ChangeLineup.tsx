@@ -6,7 +6,7 @@ import PlayerCard from "./PlayerCard";
 
 const ChangeLineup = () => {
   const [players, setPlayers] = useState(playersData);
-  const { team, setTeam, fetchTeam } = useWeb3Context();
+  const { team, submitProposalForTeamLineup, fetchTeam } = useWeb3Context();
   const [exitPlayer, setExitPlayer] = useState(null);
   const [enterPlayer, setEnterPlayer] = useState(null);
 
@@ -24,17 +24,24 @@ const ChangeLineup = () => {
     );
   }
 
-  const propose = () => {
-    let newTeam = team;
-    newTeam.map((id: Number) => {
-      if (id === enterPlayer._id) {
-        return exitPlayer._id;
+  const propose = async () => {
+    let newTeam = [];
+    // team;
+    team.map((id: Number) => {
+      console.log(id, exitPlayer._id, enterPlayer.s_id);
+      if (id == exitPlayer._id) {
+        console.log(id);
+        // return enterPlayer._id;
+        newTeam.push(enterPlayer._id);
       } else {
-        return id;
+        newTeam.push(id);
+        // return id;
       }
     });
-    setTeam(newTeam);
-    console.log(team);
+    // setTeam(newTeam);
+    // team = newTeam;
+    console.log(newTeam);
+    await submitProposalForTeamLineup(newTeam);
   };
 
   return (
