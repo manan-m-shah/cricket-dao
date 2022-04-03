@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Web3Context from "./Web3Context";
 import { connectWallet, getBalance, fetchContract } from "../scripts/ethers";
 import { ethers } from "ethers";
+import ChangeLineup from "../pages/MainComponents/ChangeLineup";
 
 const Web3Provider: React.FC = (props) => {
   const [currentAccount, setCurrentAccount] = useState("");
@@ -92,13 +93,11 @@ const Web3Provider: React.FC = (props) => {
     setTeam(ids);
   };
 
-  // const changeLineup = async (lineup: number[]) => {
-  //   const contract = fetchContract("TeamLineup")!;
-  //   const response = await contract.changeplayers([
-  //     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
-  //   ]);
-  //   console.log(response);
-  // };
+  const changeLineup = async (lineup: number[]) => {
+    const contract = fetchContract("TeamLineup")!;
+    const response = await contract.changeplayers(lineup);
+    console.log(response);
+  };
 
   // async function moveBlocks(amount: number) {
   //   console.log("Moving blocks...")
@@ -356,41 +355,42 @@ const Web3Provider: React.FC = (props) => {
     console.log(amount);
   };
   const handleExecute = async () => {
-    const args = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "23"];
-    const functionToCall = "changeplayers";
-    const teamlineup = fetchContract("TeamLineup")!;
-    const encodedFunctionCall = teamlineup.interface.encodeFunctionData(
-      functionToCall,
-      args
-    );
-    const descriptionHash = ethers.utils.keccak256(
-      ethers.utils.toUtf8Bytes("Change Team Lineup")
-    );
-    // could also use ethers.utils.id(PROPOSAL_DESCRIPTION)
+    const lineup = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 23];
+    changeLineup(lineup);
+    // const functionToCall = "changeplayers";
+    // const teamlineup = fetchContract("TeamLineup")!;
+    // const encodedFunctionCall = teamlineup.interface.encodeFunctionData(
+    //   functionToCall,
+    //   [args]
+    // );
+    // const descriptionHash = ethers.utils.keccak256(
+    //   ethers.utils.toUtf8Bytes("Change Team Lineup")
+    // );
+    // // could also use ethers.utils.id(PROPOSAL_DESCRIPTION)
 
-    const governor = fetchContract("GovernorContract")!;
-    // console.log("Queueing...");
-    // const queueTx = await governor.queue(
+    // const governor = fetchContract("GovernorContract")!;
+    // // console.log("Queueing...");
+    // // const queueTx = await governor.queue(
+    // //   [teamlineup.address],
+    // //   [0],
+    // //   [encodedFunctionCall],
+    // //   descriptionHash
+    // // );
+    // // await queueTx.wait(1);
+
+    // // if (developmentChains.includes(network.name)) {
+    // //   await moveTime(MIN_DELAY + 1);
+    // //   await moveBlocks(1);
+    // // }
+
+    // console.log("Executing...");
+    // // this will fail on a testnet because you need to wait for the MIN_DELAY!
+    // const executeTx = await governor.execute(
     //   [teamlineup.address],
     //   [0],
     //   [encodedFunctionCall],
     //   descriptionHash
     // );
-    // await queueTx.wait(1);
-
-    // if (developmentChains.includes(network.name)) {
-    //   await moveTime(MIN_DELAY + 1);
-    //   await moveBlocks(1);
-    // }
-
-    console.log("Executing...");
-    // this will fail on a testnet because you need to wait for the MIN_DELAY!
-    const executeTx = await governor.execute(
-      [teamlineup.address],
-      [0],
-      [encodedFunctionCall],
-      descriptionHash
-    );
     // await executeTx.wait(1);
   };
   useEffect(() => {

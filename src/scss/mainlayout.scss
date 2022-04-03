@@ -6,6 +6,22 @@
   margin: 0 5rem;
 }
 
+.lmao-bg {
+  background: linear-gradient(
+    -45deg,
+    #2c2443,
+    #64a89e,
+    #0c3c4c,
+    #a1af58,
+    // #bcbabc,
+    #2c2443
+  );
+
+  background-size: 800% 800%;
+  animation: gradient 25s ease-in-out infinite;
+  animation-direction: alternate;
+}
+
 nav {
   // background-color: #eee;
   display: flex;

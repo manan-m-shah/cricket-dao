@@ -1,4 +1,3 @@
-import React from "react";
 import Typewriter from "typewriter-effect";
 import vote from "../images/vote.png";
 import people from "../images/people.png";
@@ -28,7 +27,7 @@ const TypewriterSection = () => {
 const LandingPageFirstSection = () => {
   const navigate = useNavigate();
   return (
-    <div className="flex h-screen w-screen flex-col items-center justify-center bg-gradient-to-b from-slate-900">
+    <div className="flex h-screen w-screen flex-col items-center justify-center bg-gradient-to-b from-slate-900 lmao-bg">
       <div className="">
         <h1 className="text-center text-6xl text-gray-200">Cricket DAO</h1>
         <h3 className="p-10 text-center text-4xl text-gray-200">
@@ -38,7 +37,10 @@ const LandingPageFirstSection = () => {
           <button className="mr-6" onClick={() => navigate("/tickets")}>
             Get Tickets
           </button>
-          <button onClick={() => navigate("/proposals")}>Launch App</button>
+          <button className="mr-6" onClick={() => navigate("/proposals")}>
+            Launch App
+          </button>
+          <button onClick={() => navigate("/team")}>Our Team</button>
         </div>
       </div>
     </div>
