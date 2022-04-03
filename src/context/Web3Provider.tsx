@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Web3Context from "./Web3Context";
-import { connectWallet, fetchContract } from "../scripts/ethers";
+import { connectWallet, getBalance, fetchContract } from "../scripts/ethers";
 import { ethers } from "ethers";
 import { propose } from "../scripts/propose";
 
 const Web3Provider: React.FC = (props) => {
   const [currentAccount, setCurrentAccount] = useState("");
+  const [currentBalance, setCurrentBalance] = useState<string>("");
   const [tickets, setTickets] = useState<any[]>([]);
   const [proposals, setProposals] = useState<any[]>([]);
   const [currentDate, setCurrentDate] = useState({
@@ -20,7 +21,13 @@ const Web3Provider: React.FC = (props) => {
     if (accounts.length) {
       console.log(accounts[0]);
       setCurrentAccount(accounts[0]);
+      let bal:any = await getBalance();
       await getProposals();
+      bal = bal.substring(0,6);
+      bal += " ETH";
+      // const bal = await getBalance(currentAccount);
+      console.log(typeof bal);
+      setCurrentBalance(bal);
     }
   };
 
@@ -29,6 +36,30 @@ const Web3Provider: React.FC = (props) => {
     const response = await contract.showplayers();
     console.log(response);
   };
+  // let eth: any
+  // const getBalance = async (metamask = eth) => {
+  //   try {
+  //     if (!metamask) return alert('Please install metamask ')
+
+  //     const balance = await metamask.request({ method: 'eth_getBalance',params:[currentAccount,'latest'] })
+
+  //     return balance;
+  //   } catch (error) {
+  //     console.error(error)
+  //     throw new Error('No ethereum object.')
+  //   }
+  // }
+  // const getBalance = async () => {
+  //   const network = 'rinkeby' // use rinkeby testnet
+  //   const provider = ethers.getDefaultProvider(network)
+  //   console.log(`RINKBEY: ${provider}`)
+
+  //   const balance = await provider.getBalance(currentAccount);
+  //   console.log(`balance: ${balance} WEI`);
+  //   // convert a currency unit from wei to ether
+  //   const balanceInEth = ethers.utils.formatEther(balance)
+  //   console.log(`balance: ${balanceInEth} ETH`)
+  // }; 
 
   const addTicket = async (
     gameName: string,
@@ -235,6 +266,15 @@ const Web3Provider: React.FC = (props) => {
     window.ethereum.on("accountsChanged", function (accounts: String) {
       console.log(accounts[0]);
       setCurrentAccount(accounts[0]);
+      getBalance().then((bal)=>{
+        bal = bal.substring(0,6);
+        bal += " ETH";
+        // const bal = await getBalance(currentAccount);
+        console.log(typeof bal);
+        setCurrentBalance(bal);
+      })
+      // let bal:any = await getBalance();
+      // await getProposals();
     });
   });
 
@@ -247,6 +287,7 @@ const Web3Provider: React.FC = (props) => {
         buyTicket,
         getTickets,
         currentAccount,
+        currentBalance,
         tickets,
         currentDate,
         setCurrentDate,
