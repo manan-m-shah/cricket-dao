@@ -28,9 +28,9 @@ const ChangeLineup = () => {
     let newTeam = [];
     // team;
     team.map((id: Number) => {
-      console.log(id, exitPlayer._id, enterPlayer.s_id);
+      // console.log(id, exitPlayer._id, enterPlayer.s_id);
       if (id == exitPlayer._id) {
-        console.log(id);
+        // console.log(id);
         // return enterPlayer._id;
         newTeam.push(enterPlayer._id);
       } else {
@@ -40,7 +40,7 @@ const ChangeLineup = () => {
     });
     // setTeam(newTeam);
     // team = newTeam;
-    console.log(newTeam);
+    // console.log(newTeam);
     await submitProposalForTeamLineup(newTeam);
   };
 

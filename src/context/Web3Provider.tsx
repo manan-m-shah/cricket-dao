@@ -19,14 +19,14 @@ const Web3Provider: React.FC = (props) => {
   const connectMetamask = async () => {
     const accounts: any = await connectWallet();
     if (accounts.length) {
-      console.log(accounts[0]);
+      // console.log(accounts[0]);
       setCurrentAccount(accounts[0]);
       let bal: any = await getBalance();
       // await getProposals();
       bal = bal.substring(0, 6);
       bal += " ETH";
       // const bal = await getBalance(currentAccount);
-      // console.log(typeof bal);
+      // // console.log(typeof bal);
       setCurrentBalance(bal);
     }
   };
@@ -34,7 +34,7 @@ const Web3Provider: React.FC = (props) => {
   const logContract = async () => {
     const contract = fetchContract("TeamLineup")!;
     const response = await contract.showplayers();
-    console.log(response);
+    // console.log(response);
   };
 
   const addTicket = async (
@@ -42,7 +42,7 @@ const Web3Provider: React.FC = (props) => {
     amount: string,
     seatNumber: string
   ) => {
-    console.log(currentDate);
+    // console.log(currentDate);
     const contract = fetchContract("Test")!;
     const response = await contract.addtickets(
       gameName,
@@ -52,7 +52,7 @@ const Web3Provider: React.FC = (props) => {
       seatNumber,
       ethers.utils.parseEther(amount)
     );
-    console.log(response);
+    // console.log(response);
   };
 
   const getTickets = async () => {
@@ -62,7 +62,7 @@ const Web3Provider: React.FC = (props) => {
       currentDate.month,
       currentDate.year
     );
-    console.log("Tickets:", response);
+    // console.log("Tickets:", response);
     setTickets(response);
   };
 
@@ -79,7 +79,7 @@ const Web3Provider: React.FC = (props) => {
       seatNumber,
       options
     );
-    console.log(response);
+    // console.log(response);
     getTickets();
   };
 
@@ -96,18 +96,18 @@ const Web3Provider: React.FC = (props) => {
   const changeLineup = async (lineup: number[]) => {
     const contract = fetchContract("TeamLineup")!;
     const response = await contract.changeplayers(lineup);
-    console.log(response);
+    // console.log(response);
   };
 
   // async function moveBlocks(amount: number) {
-  //   console.log("Moving blocks...")
+  //   // console.log("Moving blocks...")
   //   for (let index = 0; index < amount; index++) {
   //     await rinkbey.provider.request({
   //       method: "evm_mine",
   //       params: [],
   //     })
   //   }
-  //   console.log(`Moved ${amount} blocks`)
+  //   // console.log(`Moved ${amount} blocks`)
   // }
 
   const submitProposal = async (
@@ -119,8 +119,8 @@ const Web3Provider: React.FC = (props) => {
     const governor = fetchContract("GovernorContract")!;
     const tickets = fetchContract(contract)!;
     // let functionToCall = "addtickets";
-    // console.log(typeof Number(price));
-    console.log(args);
+    // // console.log(typeof Number(price));
+    // console.log(args);
     // args = ["1","2","3","4","5","6","7","8","9","12","23"];
     // args =
     // [
@@ -137,7 +137,7 @@ const Web3Provider: React.FC = (props) => {
     //   23
     // ];
     // args = [1,2,3,4,5,6,7,8,9,12,23];
-    // console.log(args);
+    // // console.log(args);
     // let args = ["CSK vs MI",28,12,2022,23,100];
     // [String(gameName),Number(currentDate.date),Number(currentDate.month),Number(currentDate.year),Number(1),Number(price)];
     const encodedFunctionCall = tickets.interface.encodeFunctionData(
@@ -154,12 +154,12 @@ const Web3Provider: React.FC = (props) => {
     );
     const proposeReceipt = await proposeTx.wait(1);
     const proposalId = proposeReceipt.events[0].args.proposalId;
-    console.log(String(proposalId));
+    // console.log(String(proposalId));
     await getProposals();
     // await moveBlocks(1 + 1);
     // propose(functionToCall, args, proposalDescription)
     //   .then((response) => {
-    //     console.log(response);
+    //     // console.log(response);
     //     process.exit(0);
     //   })
     //   .catch((error) => {
@@ -171,7 +171,7 @@ const Web3Provider: React.FC = (props) => {
   const getProposals = async () => {
     const contract = fetchContract("GovernorContract")!;
     const proposalIds = await contract.showproposals();
-    console.log(proposalIds);
+    // console.log(proposalIds);
     const proposalsList: any = [];
 
     const waiter = await proposalIds.map(async (proposalId: Number) => {
@@ -187,17 +187,17 @@ const Web3Provider: React.FC = (props) => {
         title,
       };
       await proposalsList.push(temp);
-      // console.log(proposalsList);
+      // // console.log(proposalsList);
       setProposals([...proposalsList]);
       return;
     });
   };
   const submitProposalForTeamLineup = async (newTeam: Number[]) => {
-    // console.log(newTeam.toString());
+    // // console.log(newTeam.toString());
     // newTeam = newTeam.map((id:Number)=>{
     //   return String(id);
     // })
-    // console.log(newTeam);
+    // // console.log(newTeam);
     // [
     //     newTeam[0],
     //     newTeam[1],
@@ -236,8 +236,8 @@ const Web3Provider: React.FC = (props) => {
     // const governor = fetchContract("GovernorContract")!;
     // const teamlineup = fetchContract("TeamLineup")!;
     // let functionToCall = "addtickets";
-    // console.log(typeof Number(price));
-    // console.log(typeof currentDate.date);
+    // // console.log(typeof Number(price));
+    // // console.log(typeof currentDate.date);
     // let args = ["CSK vs MI",28,12,2022,23,100];
     // [String(gameName),Number(currentDate.date),Number(currentDate.month),Number(currentDate.year),Number(1),Number(price)];
     // const encodedFunctionCall = teamlineup.interface.encodeFunctionData(
@@ -254,12 +254,12 @@ const Web3Provider: React.FC = (props) => {
     // );
     // const proposeReceipt = await proposeTx.wait(1);
     // const proposalId = proposeReceipt.events[0].args.proposalId;
-    // console.log(String(proposalId));
+    // // console.log(String(proposalId));
     // await getProposals();
     // await moveBlocks(1 + 1);
     // propose(functionToCall, args, proposalDescription)
     //   .then((response) => {
-    //     console.log(response);
+    //     // console.log(response);
     //     process.exit(0);
     //   })
     //   .catch((error) => {
@@ -275,8 +275,8 @@ const Web3Provider: React.FC = (props) => {
     // const governor = fetchContract("GovernorContract");
     // const tickets = fetchContract("Tickets");
     // let functionToCall = "addtickets";
-    // console.log(typeof Number(price));
-    // console.log(typeof currentDate.date);
+    // // console.log(typeof Number(price));
+    // // console.log(typeof currentDate.date);
     // let args = ["CSK vs MI",28,12,2022,23,100];
     // [String(gameName),Number(currentDate.date),Number(currentDate.month),Number(currentDate.year),Number(1),Number(price)];
     // const encodedFunctionCall = await tickets.interface.encodeFunctionData(functionToCall, args)
@@ -319,40 +319,40 @@ const Web3Provider: React.FC = (props) => {
 
   const vote = async (proposalId: string, voteWay: Number) => {
     const proposalIdint = BigInt(proposalId).toString();
-    console.log(proposalIdint);
-    // console.log(typeof proposalId);
+    // console.log(proposalIdint);
+    // // console.log(typeof proposalId);
     let reason;
     if (voteWay === 1) {
       reason = "Voting yes";
     } else {
       reason = "Voting no";
     }
-    console.log("Voting...");
+    // console.log("Voting...");
     const governor = fetchContract("GovernorContract")!;
     try {
       const proposalSnapShot = await governor.proposalSnapshot(proposalId);
       const proposalDeadline = await governor.proposalDeadline(proposalId);
       // What block # the proposal was snapshot
-      console.log(`Current Proposal Snapshot: ${proposalSnapShot}`);
+      // console.log(`Current Proposal Snapshot: ${proposalSnapShot}`);
       // The block number the proposal voting expires
-      console.log(`Current Proposal Deadline: ${proposalDeadline}`);
+      // console.log(`Current Proposal Deadline: ${proposalDeadline}`);
       const voteTx = await governor.castVoteWithReason(
         proposalId,
         voteWay,
         reason
       );
-      console.log(reason);
+      // console.log(reason);
       const voteTxReceipt = await voteTx.wait(1);
-      console.log(voteTxReceipt.events[0].args.reason);
+      // console.log(voteTxReceipt.events[0].args.reason);
       const proposalState = await governor.state(proposalId);
-      console.log(`Current Proposal State: ${proposalState}`);
+      // console.log(`Current Proposal State: ${proposalState}`);
     } catch (error) {
-      console.log("Error in vote function ==> ", error);
+      // console.log("Error in vote function ==> ", error);
     }
   };
 
   const purchaseTokens = async (amount: Number) => {
-    console.log(amount);
+    // console.log(amount);
   };
   const handleExecute = async () => {
     const lineup = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 23];
@@ -369,7 +369,7 @@ const Web3Provider: React.FC = (props) => {
     // // could also use ethers.utils.id(PROPOSAL_DESCRIPTION)
 
     // const governor = fetchContract("GovernorContract")!;
-    // // console.log("Queueing...");
+    // // // console.log("Queueing...");
     // // const queueTx = await governor.queue(
     // //   [teamlineup.address],
     // //   [0],
@@ -383,7 +383,7 @@ const Web3Provider: React.FC = (props) => {
     // //   await moveBlocks(1);
     // // }
 
-    // console.log("Executing...");
+    // // console.log("Executing...");
     // // this will fail on a testnet because you need to wait for the MIN_DELAY!
     // const executeTx = await governor.execute(
     //   [teamlineup.address],
@@ -395,13 +395,13 @@ const Web3Provider: React.FC = (props) => {
   };
   useEffect(() => {
     window.ethereum.on("accountsChanged", function (accounts: String) {
-      console.log(accounts[0]);
+      // console.log(accounts[0]);
       setCurrentAccount(accounts[0]);
       getBalance().then((bal) => {
         bal = bal!.substring(0, 6);
         bal += " ETH";
         // const bal = await getBalance(currentAccount);
-        // console.log(typeof bal);
+        // // console.log(typeof bal);
         setCurrentBalance(bal);
       });
       // let bal:any = await getBalance();

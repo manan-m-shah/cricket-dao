@@ -11,7 +11,7 @@ const Enacted: FC = () => {
   }, [currentAccount]);
 
   useEffect(() => {
-    console.log(proposals);
+    // console.log(proposals);
   }, [proposals]);
 
   if (proposals.length === 0) {

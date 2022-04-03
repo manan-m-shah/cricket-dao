@@ -3,7 +3,7 @@ import { useWeb3Context } from "../../context/Web3Context";
 
 const Navbar: FC = () => {
   const { currentAccount,currentBalance, connectMetamask } = useWeb3Context();
-  console.log(currentAccount);
+  // console.log(currentAccount);
   return (
     <nav>
       {!currentAccount ? (

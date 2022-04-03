@@ -16,7 +16,7 @@ const Tickets = () => {
   );
 
   useEffect(() => {
-    console.log("getting tickets...");
+    // console.log("getting tickets...");
     getTickets();
   }, [currentDate]);
 
@@ -69,6 +69,7 @@ const Tickets = () => {
           return <Ticket ticket={ticket} />;
         })}
         {/* </div> */}
+        {/* <Ticket ticket={tickets[0]} /> */}
       </div>
     </div>
   );

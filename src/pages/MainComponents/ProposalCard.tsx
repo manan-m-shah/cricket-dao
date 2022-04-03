@@ -39,7 +39,8 @@ const ProposalCard = ({
     <div className="flex flex-col card p-4 m-4 rounded-xl">
       <div className="w-full flex flex-col flex-1 ">
         <h1 className="text-2xl text-gray-800 p-2">{title}</h1>
-        <h1 className="text-lg text-gray-700 p-2">{String(id)}</h1>
+        {/* <h1 className="text-lg text-gray-700 p-2">{String(id)}</h1> */}
+        <h1 className="text-md text-gray-700 p-2">Swap Player#23 with Player #2</h1>
       </div>
 
       {!enacted ? (

@@ -16,7 +16,7 @@ const TypewriterSection = () => {
           .typeString("The cricketing world in your hands")
           .pauseFor(1000)
           .deleteAll()
-          .typeString("Test")
+          .typeString("We will sell NFTS in the future!")
           .pauseFor(1000)
           .start();
       }}
@@ -29,8 +29,8 @@ const LandingPageFirstSection = () => {
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center bg-gradient-to-b from-slate-900 lmao-bg">
       <div className="">
-        <h1 className="text-center text-6xl text-gray-200">Cricket DAO</h1>
-        <h3 className="p-10 text-center text-4xl text-gray-200">
+        <h1 className="text-center text-8xl text-gray-200">BCCI DAO</h1>
+        <h3 className="p-10 text-center text-2xl text-gray-200">
           <TypewriterSection />
         </h3>
         <div className="flex items-center justify-center">
@@ -62,7 +62,7 @@ const Section = ({
     return (
       <div className="grid h-screen w-screen grid-rows-2 bg-white p-6 md:grid-cols-2 md:grid-rows-1">
         <div className="flex h-full flex-col items-center justify-center">
-          <h1 className="px-10 font-mono text-6xl text-gray-600">{title}</h1>
+          <h1 className="px-10 font-mono text-6xl text-gray-600 mb-5">{title}</h1>
           <h3 className="px-10 text-2xl text-gray-600">{description}</h3>
         </div>
         <img
@@ -81,7 +81,7 @@ const Section = ({
           className="w-[80%] self-center justify-self-center bg-auto"
         />
         <div className="flex h-full flex-col items-center justify-center">
-          <h1 className="px-10 font-mono text-6xl text-gray-600">{title}</h1>
+          <h1 className="px-10 font-mono text-6xl text-gray-600 mb-5">{title}</h1>
           <h3 className="px-10 text-2xl text-gray-600">{description}</h3>
         </div>
       </div>
@@ -96,27 +96,21 @@ const LandingPage = () => {
         <LandingPageFirstSection />
         <Section
           img={vote}
-          title="What is the Decentraland DAO?"
-          description='DAO stands for "Decentralized Autonomous Organization". The Decentraland DAO owns the most important smart contracts and assets that make up Decentraland – the LAND Contract, the Estates Contract, Wearables, Content Servers and the Marketplace. It also owns a substantial purse of MANA which allows it to be truly autonomous as well as subsidize various operations and initiatives throughout Decentraland.'
+          title="What is the BCCI DAO?"
+          description='DAO stands for "Decentralized Autonomous Organization". The Cricket DAO owns a great team of 25 players.'
           flip={false}
         />
         <Section
           img={people}
-          title="Why has the DAO been created? How is it relevant to me?"
-          description="Decentraland is the first fully decentralized virtual world. It was always part of the original vision to hand over control to the people who create and play in this virtual space. In short – you, the users. Through the DAO, you are in control of the policies created to determine how the world behaves: for example, what kinds of wearable items are allowed (or disallowed) after the launch of the DAO, moderation of content, LAND policy and auctions, among others."
+          title="Why has the DAO been created?"
+          description="This DAO gives you the power to select the team lineup and also sell tickets. "
           flip={true}
         />
         <Section
           img={tokens}
           title="How does the DAO work?"
-          description="The community will propose and vote on policy updates, future LAND auctions, whitelisting of NFT contracts to be allowed inside the World, Builder and Marketplace, and whatever the community deems relevant. Voting takes place on the Decentraland DAO's governance interface, powered by Aragon."
+          description="Voting takes place for a week which gives the users the power to select team lineup and also influence price of tickets. (All while enjoying the sport!!)"
           flip={false}
-        />
-        <Section
-          img={vote}
-          title="What kinds of things will you get to determine?"
-          description="Figure Out"
-          flip={true}
         />
       </div>
     </div>

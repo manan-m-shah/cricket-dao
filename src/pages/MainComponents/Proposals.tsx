@@ -11,11 +11,13 @@ const Proposals: FC = () => {
   }, [currentAccount]);
 
   useEffect(() => {
-    console.log(proposals);
+    // console.log(proposals);
   }, [proposals]);
 
   if (proposals.length === 0) {
-    return <h1>Loading</h1>;
+    return <div className="bg-gray-100 h-screen w-screen flex justify-center items-center">
+      <h1 className="text-2xl">Connect Wallet / Loading...</h1>
+    </div>;
   }
 
   return (

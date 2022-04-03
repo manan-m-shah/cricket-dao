@@ -12,10 +12,10 @@ export async function propose(
     functionToCall,
     args
   );
-  console.log(
+  // console.log(
     `Proposing ${functionToCall} on ${teamlineup.address} with ${args}`
   );
-  console.log(`Proposal Description:\n  ${proposalDescription}`);
+  // console.log(`Proposal Description:\n  ${proposalDescription}`);
   const proposeTx = await governor.propose(
     [teamlineup.address],
     [0],
@@ -38,11 +38,11 @@ export async function propose(
   // fs.writeFileSync(proposalsFile, JSON.stringify(proposals))
 
   // // The state of the proposal. 1 is not passed. 0 is passed.
-  // console.log(`Current Proposal State: ${proposalState}`)
+  // // console.log(`Current Proposal State: ${proposalState}`)
   // // What block # the proposal was snapshot
-  // console.log(`Current Proposal Snapshot: ${proposalSnapShot}`)
+  // // console.log(`Current Proposal Snapshot: ${proposalSnapShot}`)
   // // The block number the proposal voting expires
-  // console.log(`Current Proposal Deadline: ${proposalDeadline}`)
+  // // console.log(`Current Proposal Deadline: ${proposalDeadline}`)
 }
 
 // propose([NEW_STORE_VALUE], FUNC, PROPOSAL_DESCRIPTION)
