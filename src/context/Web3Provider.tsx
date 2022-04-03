@@ -175,19 +175,22 @@ const Web3Provider: React.FC = (props) => {
   const getProposals = async () => {
     const contract = fetchContract("GovernorContract")!;
     const proposalIds = await contract.showproposals();
-    const stuff: any = [];
-    await proposalIds.map(async (proposalId: Number) => {
+    console.log(proposalIds);
+    const proposalsList: any = [];
+
+    const waiter = await proposalIds.map(async (proposalId: Number) => {
       const votes = await contract.proposalVotes(proposalId);
       const state = await contract.state(proposalId);
       const hasVoted = await contract.hasVoted(proposalId, currentAccount);
       const temp = { id: proposalId, votes, state, hasVoted };
-      stuff.push(temp);
+      await proposalsList.push(temp);
+      console.log(proposalsList);
       return temp;
     });
 
-    console.log(stuff);
-    setProposals(stuff);
-
+    setProposals(proposalsList);
+    console.log(proposalsList);
+    return proposalsList;
     // await proposalPromise.map(async (promise: any) => {
     //   const proposal = await promise;
     //   temp.push(proposal);
@@ -353,10 +356,10 @@ const Web3Provider: React.FC = (props) => {
       console.log("Error in vote function ==> ", error);
     }
   };
-  
-  const purchaseTokens = async(amount:Number) =>{
+
+  const purchaseTokens = async (amount: Number) => {
     console.log(amount);
-  }
+  };
 
   useEffect(() => {
     window.ethereum.on("accountsChanged", function (accounts: String) {

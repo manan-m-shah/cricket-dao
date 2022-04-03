@@ -1,5 +1,6 @@
 import { FC } from "react";
 import className from "classnames";
+import { useWeb3Context } from "../../context/Web3Context";
 
 type IProposalCard = {
   // ! Make Proposal Tital required
@@ -11,10 +12,16 @@ type IProposalCard = {
 };
 
 const ProposalCard: FC<IProposalCard> = ({ proposal }) => {
-  // const votes = proposal.votes;
-  // const state = proposals.state;
-  console.log(proposal);
-  // console.log("done");
+  const { vote } = useWeb3Context();
+
+  //todo proposal card with following properties
+  const votes = proposal.votes;
+  const state = proposal.state;
+  const hasVotes = proposal.hasVoted;
+
+  const handleVote = (voteWay: Number) => {
+    vote(proposal.id, voteWay);
+  };
 
   return (
     <div className="card">
