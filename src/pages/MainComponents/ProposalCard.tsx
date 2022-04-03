@@ -18,7 +18,7 @@ const ProposalCard = ({
   proposal: any;
   enacted: true;
 }) => {
-  const { vote } = useWeb3Context();
+  const { vote, handleExecute } = useWeb3Context();
 
   //todo proposal card with following properties
   const votes = proposal.votes;
@@ -65,7 +65,9 @@ const ProposalCard = ({
         </div>
       ) : (
         <div>
-          <button className="px-10 bg-green-200">Enact</button>
+          <button className="px-10 bg-green-200" onClick={handleExecute}>
+            Execute
+          </button>
         </div>
       )}
     </div>

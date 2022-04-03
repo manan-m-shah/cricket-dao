@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import Web3Context from "./Web3Context";
 import { connectWallet, getBalance, fetchContract } from "../scripts/ethers";
 import { ethers } from "ethers";
-import { propose } from "../scripts/propose";
-import { TeamLineup_abi } from "../lib/constants";
 
 const Web3Provider: React.FC = (props) => {
   const [currentAccount, setCurrentAccount] = useState("");
@@ -357,7 +355,44 @@ const Web3Provider: React.FC = (props) => {
   const purchaseTokens = async (amount: Number) => {
     console.log(amount);
   };
+  const handleExecute = async () => {
+    const args = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "23"];
+    const functionToCall = "changeplayers";
+    const teamlineup = fetchContract("TeamLineup")!;
+    const encodedFunctionCall = teamlineup.interface.encodeFunctionData(
+      functionToCall,
+      args
+    );
+    const descriptionHash = ethers.utils.keccak256(
+      ethers.utils.toUtf8Bytes("Change Team Lineup")
+    );
+    // could also use ethers.utils.id(PROPOSAL_DESCRIPTION)
 
+    const governor = fetchContract("GovernorContract")!;
+    // console.log("Queueing...");
+    // const queueTx = await governor.queue(
+    //   [teamlineup.address],
+    //   [0],
+    //   [encodedFunctionCall],
+    //   descriptionHash
+    // );
+    // await queueTx.wait(1);
+
+    // if (developmentChains.includes(network.name)) {
+    //   await moveTime(MIN_DELAY + 1);
+    //   await moveBlocks(1);
+    // }
+
+    console.log("Executing...");
+    // this will fail on a testnet because you need to wait for the MIN_DELAY!
+    const executeTx = await governor.execute(
+      [teamlineup.address],
+      [0],
+      [encodedFunctionCall],
+      descriptionHash
+    );
+    // await executeTx.wait(1);
+  };
   useEffect(() => {
     window.ethereum.on("accountsChanged", function (accounts: String) {
       console.log(accounts[0]);
@@ -396,6 +431,7 @@ const Web3Provider: React.FC = (props) => {
         proposals,
         vote,
         getProposals,
+        handleExecute,
       }}
     >
       {props.children}

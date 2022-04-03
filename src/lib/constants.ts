@@ -18,10 +18,11 @@ export const TimeLock_abi = TimeLock.abi;
 export const TimeLock_address = "0xd45267B7D2AB6dD46Ba6b9af05C6eAd7d2235bed";
 // "0x1f80A7B3a49729407B8A68349a1914e6c8Cc4053";
 export const GovernorContract_abi = GovernorContract.abi;
-export const GovernorContract_address = "0xA2B5542BE66E82959C65A1a77Ad4d5d55eA7EF36";
+export const GovernorContract_address =
+  "0x01880B4210f87092c7d6BE88C66771F3976f3Cf6";
 // "0x97694fFd3a4a7E9013FdB8073601e9a6724B6559";
 // "0x5c99AB045df633c9956196bc0716A0Bde682E239";
-  // "0xa527493caca08860975537B1EB0b338025DB7fa6";
+// "0xa527493caca08860975537B1EB0b338025DB7fa6";
 // "0xF2CEc29ADCD2e24dEa6eB6f71b43c32f92455884";
 // "0xb12c5515E231e979adC2dafE397C2a41A6b09332"; //-ropsten
 // "0x6c69E45BB06BAe9968acB7Fd0CaB1346ef7Fd0a6";
