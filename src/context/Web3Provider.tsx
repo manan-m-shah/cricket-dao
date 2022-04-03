@@ -22,12 +22,12 @@ const Web3Provider: React.FC = (props) => {
     if (accounts.length) {
       console.log(accounts[0]);
       setCurrentAccount(accounts[0]);
-      let bal:any = await getBalance();
-      await getProposals();
-      bal = bal.substring(0,6);
+      let bal: any = await getBalance();
+      // await getProposals();
+      bal = bal.substring(0, 6);
       bal += " ETH";
       // const bal = await getBalance(currentAccount);
-      console.log(typeof bal);
+      // console.log(typeof bal);
       setCurrentBalance(bal);
     }
   };
@@ -95,14 +95,14 @@ const Web3Provider: React.FC = (props) => {
     // team=ids;
   };
 
-  const changeLineup = async (lineup: number[]) => {
-    const contract = fetchContract("TeamLineup")!;
-    const response = await contract.changeplayers([
-      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
-    ]);
-    console.log(response);
-  };
-  
+  // const changeLineup = async (lineup: number[]) => {
+  //   const contract = fetchContract("TeamLineup")!;
+  //   const response = await contract.changeplayers([
+  //     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+  //   ]);
+  //   console.log(response);
+  // };
+
   // async function moveBlocks(amount: number) {
   //   console.log("Moving blocks...")
   //   for (let index = 0; index < amount; index++) {
@@ -113,7 +113,7 @@ const Web3Provider: React.FC = (props) => {
   //   }
   //   console.log(`Moved ${amount} blocks`)
   // }
-  
+
   const submitProposal = async (
     functionToCall: string,
     args: any[],
@@ -126,7 +126,7 @@ const Web3Provider: React.FC = (props) => {
     // console.log(typeof Number(price));
     console.log(args);
     // args = ["1","2","3","4","5","6","7","8","9","12","23"];
-    // args = 
+    // args =
     // [
     //   1,
     //   2,
@@ -171,13 +171,27 @@ const Web3Provider: React.FC = (props) => {
     //     process.exit(1);
     //   });
   };
+
   const getProposals = async () => {
     const contract = fetchContract("GovernorContract")!;
-    const response = await contract.showproposals();
-    console.log(response);
-    setProposals(response);
+    const proposalIds = await contract.showproposals();
+    console.log(proposalIds);
+    const proposalPromise = await proposalIds.map(
+      async (proposalId: Number) => {
+        const votes = await contract.proposalVotes(proposalId);
+        const state = await contract.state(proposalId);
+        const hasVoted = await contract.hasVoted(proposalId, currentAccount);
+        return { id: proposalId, votes, state, hasVoted };
+      }
+    );
+
+    const setProposalState = await proposalPromise.map(async (promise: any) => {
+      const proposal = await promise;
+      setProposals([...proposals, proposal]); //todo set proposals
+      return proposal;
+    });
   };
-  const submitProposalForTeamLineup =async (newTeam:Number[]) => {
+  const submitProposalForTeamLineup = async (newTeam: Number[]) => {
     // console.log(newTeam.toString());
     // newTeam = newTeam.map((id:Number)=>{
     //   return String(id);
@@ -200,22 +214,24 @@ const Web3Provider: React.FC = (props) => {
     const functionToCall = "changeplayers";
     await submitProposal(
       "changeplayers",
-      [[
-        String(newTeam[0]),
-        String(newTeam[1]),
-        String(newTeam[2]),
-        String(newTeam[3]),
-        String(newTeam[4]),
-        String(newTeam[5]),
-        String(newTeam[6]),
-        String(newTeam[7]),
-        String(newTeam[8]),
-        String(newTeam[9]),
-        String(newTeam[10]),
-      ]],
+      [
+        [
+          String(newTeam[0]),
+          String(newTeam[1]),
+          String(newTeam[2]),
+          String(newTeam[3]),
+          String(newTeam[4]),
+          String(newTeam[5]),
+          String(newTeam[6]),
+          String(newTeam[7]),
+          String(newTeam[8]),
+          String(newTeam[9]),
+          String(newTeam[10]),
+        ],
+      ],
       proposalDescription,
       "TeamLineup"
-    )
+    );
     // const governor = fetchContract("GovernorContract")!;
     // const teamlineup = fetchContract("TeamLineup")!;
     // let functionToCall = "addtickets";
@@ -249,7 +265,7 @@ const Web3Provider: React.FC = (props) => {
     //     console.error(error);
     //     process.exit(1);
     //   });
-  }
+  };
   const submitProposalForTickets = async (
     gameName: string,
     amount: Number,
@@ -290,38 +306,39 @@ const Web3Provider: React.FC = (props) => {
         String(price),
       ],
       proposalDescription,
-      "Tickets",
+      "Tickets"
       // "proposal to add tickets"
-    )
-      // .then(async() => getProposals())
-      // .catch((error) => {
-      //   console.error(error);
-      //   // process.exit(1);
-      // });
+    );
+    // .then(async() => getProposals())
+    // .catch((error) => {
+    //   console.error(error);
+    //   // process.exit(1);
+    // });
   };
-  const vote = async (proposalId:string,voteWay:Number) => {
+
+  const vote = async (proposalId: string, voteWay: Number) => {
     const proposalIdint = BigInt(proposalId).toString();
     console.log(proposalIdint);
     // console.log(typeof proposalId);
     let reason;
-    if(voteWay===1){
-      reason="Voting yes";
-    }else{
-      reason="Voting no";
+    if (voteWay === 1) {
+      reason = "Voting yes";
+    } else {
+      reason = "Voting no";
     }
     console.log("Voting...");
     const governor = fetchContract("GovernorContract")!;
     try {
-      const proposalSnapShot = await governor.proposalSnapshot(proposalId)
-      const proposalDeadline = await governor.proposalDeadline(proposalId)
-        // What block # the proposal was snapshot
-        console.log(`Current Proposal Snapshot: ${proposalSnapShot}`)
-        // The block number the proposal voting expires
-        console.log(`Current Proposal Deadline: ${proposalDeadline}`)
+      const proposalSnapShot = await governor.proposalSnapshot(proposalId);
+      const proposalDeadline = await governor.proposalDeadline(proposalId);
+      // What block # the proposal was snapshot
+      console.log(`Current Proposal Snapshot: ${proposalSnapShot}`);
+      // The block number the proposal voting expires
+      console.log(`Current Proposal Deadline: ${proposalDeadline}`);
       const voteTx = await governor.castVoteWithReason(
         proposalId,
         voteWay,
-        reason,
+        reason
       );
       console.log(reason);
       const voteTxReceipt = await voteTx.wait(1);
@@ -329,20 +346,21 @@ const Web3Provider: React.FC = (props) => {
       const proposalState = await governor.state(proposalId);
       console.log(`Current Proposal State: ${proposalState}`);
     } catch (error) {
-      console.log("Error in vote function ==> ",error);
+      console.log("Error in vote function ==> ", error);
     }
-  }
+  };
+
   useEffect(() => {
     window.ethereum.on("accountsChanged", function (accounts: String) {
       console.log(accounts[0]);
       setCurrentAccount(accounts[0]);
-      getBalance().then((bal)=>{
-        bal = bal.substring(0,6);
+      getBalance().then((bal) => {
+        bal = bal.substring(0, 6);
         bal += " ETH";
         // const bal = await getBalance(currentAccount);
-        console.log(typeof bal);
+        // console.log(typeof bal);
         setCurrentBalance(bal);
-      })
+      });
       // let bal:any = await getBalance();
       // await getProposals();
     });
@@ -366,9 +384,9 @@ const Web3Provider: React.FC = (props) => {
         fetchTeam,
         submitProposalForTickets,
         submitProposalForTeamLineup,
-        changeLineup,
         proposals,
-        vote
+        vote,
+        getProposals,
       }}
     >
       {props.children}
