@@ -9,8 +9,8 @@ const Proposals: FC = () => {
   return (
     <div className="outlet proposals">
       <ProposalSubmision />
-      <button onClick={() => vote(proposals[1],1)}>Vote+</button>
-      <button onClick={() => vote(proposals[1],0)}>Vote-</button>
+      <button onClick={() => vote(proposals[3],1)}>Vote+</button>
+      <button onClick={() => vote(proposals[3],0)}>Vote-</button>
       {/* <ProposalCard pending={true} leading={true} timeLeft={7} />
       <ProposalCard pending={false} />
       <ProposalCard pending={true} timeLeft={2} />

@@ -3,6 +3,7 @@ import Web3Context from "./Web3Context";
 import { connectWallet, getBalance, fetchContract } from "../scripts/ethers";
 import { ethers } from "ethers";
 import { propose } from "../scripts/propose";
+import { TeamLineup_abi } from "../lib/constants";
 
 const Web3Provider: React.FC = (props) => {
   const [currentAccount, setCurrentAccount] = useState("");
@@ -36,30 +37,6 @@ const Web3Provider: React.FC = (props) => {
     const response = await contract.showplayers();
     console.log(response);
   };
-  // let eth: any
-  // const getBalance = async (metamask = eth) => {
-  //   try {
-  //     if (!metamask) return alert('Please install metamask ')
-
-  //     const balance = await metamask.request({ method: 'eth_getBalance',params:[currentAccount,'latest'] })
-
-  //     return balance;
-  //   } catch (error) {
-  //     console.error(error)
-  //     throw new Error('No ethereum object.')
-  //   }
-  // }
-  // const getBalance = async () => {
-  //   const network = 'rinkeby' // use rinkeby testnet
-  //   const provider = ethers.getDefaultProvider(network)
-  //   console.log(`RINKBEY: ${provider}`)
-
-  //   const balance = await provider.getBalance(currentAccount);
-  //   console.log(`balance: ${balance} WEI`);
-  //   // convert a currency unit from wei to ether
-  //   const balanceInEth = ethers.utils.formatEther(balance)
-  //   console.log(`balance: ${balanceInEth} ETH`)
-  // }; 
 
   const addTicket = async (
     gameName: string,
@@ -115,6 +92,7 @@ const Web3Provider: React.FC = (props) => {
       ids.push(parseInt(id));
     });
     setTeam(ids);
+    // team=ids;
   };
 
   const changeLineup = async (lineup: number[]) => {
@@ -139,13 +117,31 @@ const Web3Provider: React.FC = (props) => {
   const submitProposal = async (
     functionToCall: string,
     args: any[],
-    proposalDescription: string
+    proposalDescription: string,
+    contract: string
   ) => {
     const governor = fetchContract("GovernorContract")!;
-    const tickets = fetchContract("Tickets")!;
+    const tickets = fetchContract(contract)!;
     // let functionToCall = "addtickets";
     // console.log(typeof Number(price));
-    console.log(typeof currentDate.date);
+    console.log(args);
+    // args = ["1","2","3","4","5","6","7","8","9","12","23"];
+    // args = 
+    // [
+    //   1,
+    //   2,
+    //   3,
+    //   4,
+    //   5,
+    //   6,
+    //   7,
+    //   8,
+    //   9,
+    //   12,
+    //   23
+    // ];
+    // args = [1,2,3,4,5,6,7,8,9,12,23];
+    // console.log(args);
     // let args = ["CSK vs MI",28,12,2022,23,100];
     // [String(gameName),Number(currentDate.date),Number(currentDate.month),Number(currentDate.year),Number(1),Number(price)];
     const encodedFunctionCall = tickets.interface.encodeFunctionData(
@@ -181,6 +177,79 @@ const Web3Provider: React.FC = (props) => {
     console.log(response);
     setProposals(response);
   };
+  const submitProposalForTeamLineup =async (newTeam:Number[]) => {
+    // console.log(newTeam.toString());
+    // newTeam = newTeam.map((id:Number)=>{
+    //   return String(id);
+    // })
+    // console.log(newTeam);
+    // [
+    //     newTeam[0],
+    //     newTeam[1],
+    //     newTeam[2],
+    //     newTeam[3],
+    //     newTeam[4],
+    //     newTeam[5],
+    //     newTeam[6],
+    //     newTeam[7],
+    //     newTeam[8],
+    //     newTeam[9],
+    //     newTeam[10],
+    //   ],
+    const proposalDescription = "Change Team Lineup";
+    const functionToCall = "changeplayers";
+    await submitProposal(
+      "changeplayers",
+      [[
+        String(newTeam[0]),
+        String(newTeam[1]),
+        String(newTeam[2]),
+        String(newTeam[3]),
+        String(newTeam[4]),
+        String(newTeam[5]),
+        String(newTeam[6]),
+        String(newTeam[7]),
+        String(newTeam[8]),
+        String(newTeam[9]),
+        String(newTeam[10]),
+      ]],
+      proposalDescription,
+      "TeamLineup"
+    )
+    // const governor = fetchContract("GovernorContract")!;
+    // const teamlineup = fetchContract("TeamLineup")!;
+    // let functionToCall = "addtickets";
+    // console.log(typeof Number(price));
+    // console.log(typeof currentDate.date);
+    // let args = ["CSK vs MI",28,12,2022,23,100];
+    // [String(gameName),Number(currentDate.date),Number(currentDate.month),Number(currentDate.year),Number(1),Number(price)];
+    // const encodedFunctionCall = teamlineup.interface.encodeFunctionData(
+    //   functionToCall,
+    //   newTeam
+    // );
+    // // let proposalDescription = `Proposal to add ${amount} tickets of ${gameName} to be played on ${currentDate.date}/${currentDate.month}/${currentDate.year} of ${price} each`;
+
+    // const proposeTx = await governor.propose(
+    //   [teamlineup.address],
+    //   [0],
+    //   [encodedFunctionCall],
+    //   proposalDescription
+    // );
+    // const proposeReceipt = await proposeTx.wait(1);
+    // const proposalId = proposeReceipt.events[0].args.proposalId;
+    // console.log(String(proposalId));
+    // await getProposals();
+    // await moveBlocks(1 + 1);
+    // propose(functionToCall, args, proposalDescription)
+    //   .then((response) => {
+    //     console.log(response);
+    //     process.exit(0);
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //     process.exit(1);
+    //   });
+  }
   const submitProposalForTickets = async (
     gameName: string,
     amount: Number,
@@ -220,7 +289,8 @@ const Web3Provider: React.FC = (props) => {
         String(amount),
         String(price),
       ],
-      proposalDescription
+      proposalDescription,
+      "Tickets",
       // "proposal to add tickets"
     )
       // .then(async() => getProposals())
@@ -295,6 +365,7 @@ const Web3Provider: React.FC = (props) => {
         setTeam,
         fetchTeam,
         submitProposalForTickets,
+        submitProposalForTeamLineup,
         changeLineup,
         proposals,
         vote
