@@ -175,24 +175,25 @@ const Web3Provider: React.FC = (props) => {
   const getProposals = async () => {
     const contract = fetchContract("GovernorContract")!;
     const proposalIds = await contract.showproposals();
-    console.log(proposalIds);
-    const proposalPromise = await proposalIds.map(
-      async (proposalId: Number) => {
-        const votes = await contract.proposalVotes(proposalId);
-        const state = await contract.state(proposalId);
-        const hasVoted = await contract.hasVoted(proposalId, currentAccount);
-        return { id: proposalId, votes, state, hasVoted };
-      }
-    );
-
-    let temp: any = [];
-
-    await proposalPromise.map(async (promise: any) => {
-      const proposal = await promise;
-      temp.push(proposal);
+    const stuff: any = [];
+    await proposalIds.map(async (proposalId: Number) => {
+      const votes = await contract.proposalVotes(proposalId);
+      const state = await contract.state(proposalId);
+      const hasVoted = await contract.hasVoted(proposalId, currentAccount);
+      const temp = { id: proposalId, votes, state, hasVoted };
+      stuff.push(temp);
+      return temp;
     });
 
-    setProposals([...proposals, ...temp]);
+    console.log(stuff);
+    setProposals(stuff);
+
+    // await proposalPromise.map(async (promise: any) => {
+    //   const proposal = await promise;
+    //   temp.push(proposal);
+    // });
+
+    // setProposals([...proposals, ...temp]);
   };
   const submitProposalForTeamLineup = async (newTeam: Number[]) => {
     // console.log(newTeam.toString());
