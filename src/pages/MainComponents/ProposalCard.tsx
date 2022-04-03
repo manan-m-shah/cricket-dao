@@ -16,6 +16,7 @@ const ProposalCard = ({ proposal }: { proposal: any }) => {
 
   //todo proposal card with following properties
   const votes = proposal.votes;
+  //*0=pending 1=active 2=cancelled 3=defeated 4-succeeded 5-queded 6-expired 7-excecuted
   const state = proposal.state;
   const hasVotes = proposal.hasVoted;
 

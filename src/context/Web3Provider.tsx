@@ -15,7 +15,7 @@ const Web3Provider: React.FC = (props) => {
     month: null,
     year: null,
   });
-  const [team, setTeam] = useState<number[]>([]);
+  const [team, setTeam] = useState<number[]>(null);
 
   const connectMetamask = async () => {
     const accounts: any = await connectWallet();
@@ -92,7 +92,6 @@ const Web3Provider: React.FC = (props) => {
       ids.push(parseInt(id));
     });
     setTeam(ids);
-    // team=ids;
   };
 
   // const changeLineup = async (lineup: number[]) => {
