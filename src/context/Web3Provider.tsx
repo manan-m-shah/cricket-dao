@@ -349,6 +349,10 @@ const Web3Provider: React.FC = (props) => {
       console.log("Error in vote function ==> ", error);
     }
   };
+  
+  const purchaseTokens = async(amount:Number) =>{
+    console.log(amount);
+  }
 
   useEffect(() => {
     window.ethereum.on("accountsChanged", function (accounts: String) {
@@ -384,6 +388,7 @@ const Web3Provider: React.FC = (props) => {
         fetchTeam,
         submitProposalForTickets,
         submitProposalForTeamLineup,
+        purchaseTokens,
         proposals,
         vote,
         getProposals,
