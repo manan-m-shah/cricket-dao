@@ -11,7 +11,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 6rem;
+  padding: 2rem 6rem;
   // margin: 0 5rem;
 
   .eth-info {
@@ -24,6 +24,7 @@ nav {
 footer {
   padding: 2rem;
   margin: 0 5rem;
+  text-align: center;
   // background-color: rgb(74, 129, 129);
 }
 
@@ -45,6 +46,7 @@ aside {
     text-align: center;
     text-transform: capitalize;
     // background-color: cornflowerblue;
+    color: darkblue;
     padding: 0.75rem 2rem;
     border-radius: 3px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;

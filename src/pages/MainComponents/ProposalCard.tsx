@@ -37,14 +37,23 @@ const ProposalCard = ({ proposal }: { proposal: any }) => {
         </h1>
       </div>
 
-      <div className="flex w-full justify-around">
-        <button className="px-20 py-4" onClick={() => vote(proposal.id, 2)}>
+      <div className="flex w-full justify-around mt-4">
+        <button
+          className="px-20 py-4 text-yellow-800 bg-yellow-100"
+          onClick={() => vote(proposal.id, 2)}
+        >
           Abstain
         </button>
-        <button className="px-20 py-4" onClick={() => vote(proposal.id, 0)}>
+        <button
+          className="px-20 py-4 text-red-800 bg-red-100"
+          onClick={() => vote(proposal.id, 0)}
+        >
           Vote Against
         </button>
-        <button className="px-20 py-4" onClick={() => vote(proposal.id, 1)}>
+        <button
+          className="px-20 py-4 text-green-800 bg-green-100"
+          onClick={() => vote(proposal.id, 1)}
+        >
           Vote For
         </button>
         <button className="px-20 py-4" onClick={() => vote(proposal.id, 1)}>

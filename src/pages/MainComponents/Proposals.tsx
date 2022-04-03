@@ -20,7 +20,6 @@ const Proposals: FC = () => {
 
   return (
     <div className="outlet proposals">
-      <h1>{proposals.length}</h1>
       <ProposalSubmision />
       {proposals.map((proposal: any) => {
         return (

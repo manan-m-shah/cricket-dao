@@ -9,7 +9,11 @@ const SideBar: FC = () => {
       <ul>
         {pathsAndComponents.map((elm, index) => {
           return (
-            <li key={index} onClick={() => navigate(elm.path)}>
+            <li
+              key={index}
+              onClick={() => navigate(elm.path)}
+              className="side-btn"
+            >
               {/* {elm.icon} */}
               {elm.name || elm.path}
             </li>
