@@ -35,7 +35,10 @@ const LandingPageFirstSection = () => {
           <TypewriterSection />
         </h3>
         <div className="flex items-center justify-center">
-          <button onClick={() => navigate("/tokens")}>Launch App</button>
+          <button className="mr-6" onClick={() => navigate("/tickets")}>
+            Get Tickets
+          </button>
+          <button onClick={() => navigate("/proposals")}>Launch App</button>
         </div>
       </div>
     </div>

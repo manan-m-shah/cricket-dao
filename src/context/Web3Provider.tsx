@@ -15,7 +15,7 @@ const Web3Provider: React.FC = (props) => {
     month: null,
     year: null,
   });
-  const [team, setTeam] = useState<number[]>(null);
+  const [team, setTeam] = useState<number[]>([]);
 
   const connectMetamask = async () => {
     const accounts: any = await connectWallet();
@@ -185,11 +185,14 @@ const Web3Provider: React.FC = (props) => {
       }
     );
 
-    const setProposalState = await proposalPromise.map(async (promise: any) => {
+    let temp: any = [];
+
+    await proposalPromise.map(async (promise: any) => {
       const proposal = await promise;
-      setProposals([...proposals, proposal]); //todo set proposals
-      return proposal;
+      temp.push(proposal);
     });
+
+    setProposals([...proposals, ...temp]);
   };
   const submitProposalForTeamLineup = async (newTeam: Number[]) => {
     // console.log(newTeam.toString());
@@ -355,7 +358,7 @@ const Web3Provider: React.FC = (props) => {
       console.log(accounts[0]);
       setCurrentAccount(accounts[0]);
       getBalance().then((bal) => {
-        bal = bal.substring(0, 6);
+        bal = bal!.substring(0, 6);
         bal += " ETH";
         // const bal = await getBalance(currentAccount);
         // console.log(typeof bal);

@@ -7,13 +7,12 @@
 }
 
 nav {
-  background-color: #eee;
+  // background-color: #eee;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 6rem;
-  margin: 0 5rem;
-  // background-color: rgb(219, 138, 138);
+  padding: 1rem 6rem;
+  // margin: 0 5rem;
 
   .eth-info {
     p {

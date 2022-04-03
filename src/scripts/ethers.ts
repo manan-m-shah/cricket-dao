@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { ContractInterface, ethers } from 'ethers'
+import { ContractInterface, ethers } from "ethers";
 import {
   GovernorContract_abi,
   GovernorContract_address,
@@ -13,67 +12,71 @@ import {
   Tickets_address,
   Test_address,
   Test_abi,
-} from '../lib/constants'
-let eth: any
+} from "../lib/constants";
+let eth: any;
 
-if (typeof window !== 'undefined') {
-  eth = window.ethereum
+if (typeof window !== "undefined") {
+  eth = window.ethereum;
 }
 
 export const fetchContract = (contract: String) => {
   switch (contract) {
-    case 'GovernorContract':
-      return getEthereumContract(GovernorContract_address, GovernorContract_abi)
-    case 'TeamLineup':
-      return getEthereumContract(TeamLineup_address, TeamLineup_abi)
-    case 'TimeLock':
-      return getEthereumContract(TimeLock_address, TimeLock_abi)
-    case 'BCCIToken':
-      return getEthereumContract(BCCIToken_address, BCCIToken_abi)
-    case 'Tickets':
-      return getEthereumContract(Tickets_address, Tickets_abi)
-    case 'Test':
-      return getEthereumContract(Test_address, Test_abi)
+    case "GovernorContract":
+      return getEthereumContract(
+        GovernorContract_address,
+        GovernorContract_abi
+      );
+    case "TeamLineup":
+      return getEthereumContract(TeamLineup_address, TeamLineup_abi);
+    case "TimeLock":
+      return getEthereumContract(TimeLock_address, TimeLock_abi);
+    case "BCCIToken":
+      return getEthereumContract(BCCIToken_address, BCCIToken_abi);
+    case "Tickets":
+      return getEthereumContract(Tickets_address, Tickets_abi);
+    case "Test":
+      return getEthereumContract(Test_address, Test_abi);
     default:
-      break
+      break;
   }
-}
+};
 
 const getEthereumContract = (
   contractAddress: string,
   contractABI: ContractInterface
 ) => {
+  // @ts-ignore
   const provider = new ethers.providers.Web3Provider(ethereum);
-  const signer = provider.getSigner()
-  const contract = new ethers.Contract(contractAddress, contractABI, signer)
-  return contract
-}
+  const signer = provider.getSigner();
+  const contract = new ethers.Contract(contractAddress, contractABI, signer);
+  return contract;
+};
 
 export const connectWallet = async (metamask = eth) => {
   try {
-    if (!metamask) return alert('Please install metamask ')
+    if (!metamask) return alert("Please install metamask ");
 
-    const accounts = await metamask.request({ method: 'eth_requestAccounts' })
+    const accounts = await metamask.request({ method: "eth_requestAccounts" });
 
-    return accounts
+    return accounts;
   } catch (error) {
-    console.error(error)
-    throw new Error('No ethereum object.')
+    console.error(error);
+    throw new Error("No ethereum object.");
   }
-}
+};
 
 export const getWallet = async (metamask = eth) => {
   try {
-    if (!metamask) return alert('Please install metamask ')
+    if (!metamask) return alert("Please install metamask ");
 
-    const accounts = await metamask.request({ method: 'eth_accounts' })
+    const accounts = await metamask.request({ method: "eth_accounts" });
 
-    return accounts
+    return accounts;
   } catch (error) {
-    console.error(error)
-    throw new Error('No ethereum object.')
+    console.error(error);
+    throw new Error("No ethereum object.");
   }
-}
+};
 
 export const getBalance = async (metamask = eth) => {
   try {
@@ -85,10 +88,10 @@ export const getBalance = async (metamask = eth) => {
       params: [currentAccount[0], "latest"],
     });
     // console.log(balance);
-      console.log(`balance: ${balance} WEI`);
-      // convert a currency unit from wei to ether
-      const balanceInEth = ethers.utils.formatEther(balance)
-      console.log(`balance: ${balanceInEth} ETH`)
+    console.log(`balance: ${balance} WEI`);
+    // convert a currency unit from wei to ether
+    const balanceInEth = ethers.utils.formatEther(balance);
+    console.log(`balance: ${balanceInEth} ETH`);
     return balanceInEth;
   } catch (error) {
     console.error(error);
