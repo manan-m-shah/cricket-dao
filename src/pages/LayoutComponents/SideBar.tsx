@@ -11,7 +11,7 @@ const SideBar: FC = () => {
           return (
             <li key={index} onClick={() => navigate(elm.path)}>
               {/* {elm.icon} */}
-              {elm.path}
+              {elm.name || elm.path}
             </li>
           );
         })}
